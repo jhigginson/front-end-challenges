@@ -29,18 +29,84 @@
   <body>
     <header>
       <h1>TODO</h1>
+      <img src="images/icon-sun.svg" />
     </header>
-    <main></main>
-
-    <!-- Add dynamic number -->
-    items left All Active Completed Clear Completed Drag and drop to reorder
-    list
-
-    <div class="attribution">
-      Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-        >Frontend Mentor</a
-      >. Coded by <a href="#">John Higginson</a>.
-    </div>
+    <main>
+      <form autocomplete="off">
+        <div class="fake-input">
+          <div class="circle"></div>
+          <input
+            class="rounded-box"
+            type="text"
+            id="new-item"
+            name="newTodo"
+            placeholder="Create a new todo..."
+          />
+        </div>
+        <input type="submit" hidden />
+      </form>
+      <ul>
+        <li class="checked">
+          <div class="checkbox">
+            <input type="checkbox" id="checkbox1" />
+            <label for="checkbox1">Complete online JavaScript course</label>
+          </div>
+          <img class="delete" src="images/icon-cross.svg" />
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" id="checkbox2" />
+            <label for="checkbox2">Jog around the park 3x</label>
+          </div>
+          <img class="delete" src="images/icon-cross.svg" />
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" id="checkbox3" />
+            <label for="checkbox3">10 minutes meditation</label>
+          </div>
+          <img class="delete" src="images/icon-cross.svg" />
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" id="checkbox4" />
+            <label for="checkbox4">Read for 1 hour</label>
+          </div>
+          <img class="delete" src="images/icon-cross.svg" />
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" id="checkbox5" />
+            <label for="checkbox5">Pick up groceries</label>
+          </div>
+          <img class="delete" src="images/icon-cross.svg" />
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" id="checkbox6" />
+            <label for="checkbox6">Complete Todo App on Frontend Mentor</label>
+          </div>
+          <img class="delete" src="images/icon-cross.svg" />
+        </li>
+        <li>
+          <div>5 items left</div>
+          <a>Clear Completed</a>
+        </li>
+      </ul>
+      <div class="rounded-box sort-buttons">
+        <a class="selected-sort" href="#">All</a>
+        <a href="#">Active</a>
+        <a href="#">Completed</a>
+      </div>
+      <p class="reorder-instructions">Drag and Drop to Reorder List</p>
+    </main>
+    <footer>
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="#">John Higginson</a>.
+      </div>
+    </footer>
   </body>
 </html>
