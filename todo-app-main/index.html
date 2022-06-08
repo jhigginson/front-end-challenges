@@ -33,7 +33,7 @@
     </header>
     <main>
       <form autocomplete="off">
-        <div class="fake-input">
+        <div class="fake-input rounded-box">
           <div class="circle"></div>
           <input
             class="rounded-box"
@@ -46,46 +46,35 @@
         <input type="submit" hidden />
       </form>
       <ul>
-        <li class="checked">
-          <div class="checkbox">
-            <input type="checkbox" id="checkbox1" />
-            <label for="checkbox1">Complete online JavaScript course</label>
-          </div>
+        <li draggable="true">
+          <input type="checkbox" id="checkbox1" />
+          <label for="checkbox1">Complete online JavaScript course</label>
           <img class="delete" src="images/icon-cross.svg" />
         </li>
         <li>
-          <div class="checkbox">
-            <input type="checkbox" id="checkbox2" />
-            <label for="checkbox2">Jog around the park 3x</label>
-          </div>
+          <input type="checkbox" id="checkbox2" />
+          <label for="checkbox2">Jog around the park 3x</label>
+
           <img class="delete" src="images/icon-cross.svg" />
         </li>
         <li>
-          <div class="checkbox">
-            <input type="checkbox" id="checkbox3" />
-            <label for="checkbox3">10 minutes meditation</label>
-          </div>
+          <input type="checkbox" id="checkbox3" />
+          <label for="checkbox3">10 minutes meditation</label>
           <img class="delete" src="images/icon-cross.svg" />
         </li>
         <li>
-          <div class="checkbox">
-            <input type="checkbox" id="checkbox4" />
-            <label for="checkbox4">Read for 1 hour</label>
-          </div>
+          <input type="checkbox" id="checkbox4" checked />
+          <label for="checkbox4">Read for 1 hour</label>
           <img class="delete" src="images/icon-cross.svg" />
         </li>
         <li>
-          <div class="checkbox">
-            <input type="checkbox" id="checkbox5" />
-            <label for="checkbox5">Pick up groceries</label>
-          </div>
+          <input type="checkbox" id="checkbox5" />
+          <label for="checkbox5">Pick up groceries</label>
           <img class="delete" src="images/icon-cross.svg" />
         </li>
         <li>
-          <div class="checkbox">
-            <input type="checkbox" id="checkbox6" />
-            <label for="checkbox6">Complete Todo App on Frontend Mentor</label>
-          </div>
+          <input type="checkbox" id="checkbox6" />
+          <label for="checkbox6">Complete Todo App on Frontend Mentor</label>
           <img class="delete" src="images/icon-cross.svg" />
         </li>
         <li>
@@ -93,8 +82,8 @@
           <a>Clear Completed</a>
         </li>
       </ul>
-      <div class="rounded-box sort-buttons">
-        <a class="selected-sort" href="#">All</a>
+      <div class="rounded-box filter-buttons">
+        <a class="selected-filter" href="#">All</a>
         <a href="#">Active</a>
         <a href="#">Completed</a>
       </div>

@@ -4,14 +4,21 @@
   box-sizing: border-box;
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit;
-  font-weight: bold;
+}
+
+a:hover,
+a:active {
+  color: hsl(234, 39%, 85%);
+  cursor: pointer;
 }
 
 html {
   height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -19,25 +26,35 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   font-family: "Josefin Sans", sans-serif;
+  font-size: 1.125rem;
   background: url("images/bg-mobile-dark.jpg") top/contain no-repeat,
     hsl(235, 21%, 11%);
-  font-size: 18px;
-  color: white;
-  padding: 0;
-  margin: 2rem 1.6rem;
+  color: hsl(234, 39%, 85%);
+  margin: 0;
+  padding: 1.9rem 1.7rem 1.2rem 1.7rem;
   width: auto;
-  height: calc(100vh - 4rem);
+  height: 100%;
+}
+
+@media (min-width: 40rem) {
+
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  color: white;
 }
 
 header h1 {
   font-size: 1.75rem;
   letter-spacing: 0.5rem;
+}
+
+header img {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 button,
@@ -49,45 +66,54 @@ textarea {
 }
 
 main {
-  margin-top: 1.4rem;
-  color: hsl(234, 39%, 85%);
+  margin-top: 0.8rem;
   font-size: 70%;
-}
-
-.fake-input {
-  position: relative;
 }
 
 .rounded-box {
   border-radius: 5px;
   background: hsl(235, 24%, 19%);
-  width: 100%;
+  width: auto;
+}
+
+.fake-input {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.fake-input input {
+  background: transparent;
 }
 
 #new-item {
   border: none;
   outline: none;
-  padding: 1rem;
-  padding-left: 3.6rem;
+  padding: 0;
+  margin: 0;
+  padding-left: 1rem;
   color: inherit;
   height: 3rem;
+  flex-grow: 1;
+  caret-color: hsl(220, 98%, 61%);
 }
 
 .circle {
   background: transparent;
   border: 1px solid hsl(233, 14%, 35%);
   border-radius: 50%;
-  width: 1.2rem;
-  height: 1.2rem;
-  position: absolute;
-  top: calc(50% - 0.6rem);
-  left: 1.2rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
 }
 
 ul {
   display: flex;
   flex-direction: column;
   list-style: none;
+  margin: 1.2rem 0;
   padding: 0;
   box-shadow: 0 2rem 30px 3em rgba(0, 0, 0, 0.2);
 }
@@ -97,7 +123,6 @@ li {
   justify-content: space-between;
   align-items: center;
   background-color: hsl(235, 24%, 19%);
-  /* text-align: center; */
   border-bottom: 1px solid hsl(237, 14%, 26%);
   height: 3rem;
   padding: 0 1rem;
@@ -107,24 +132,66 @@ input[type="checkbox"] {
   border: 1px solid hsl(233, 14%, 35%);
   background: transparent;
   border-radius: 50%;
-  width: 1.2rem;
-  height: 1.2rem;
-  vertical-align: middle;
+  width: 1.1rem;
+  height: 1.1rem;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+}
+input[type="checkbox"]:hover,
+input[type="checkbox"] + label:hover {
+  cursor: pointer;
 }
 
-.checkbox label {
-  padding-left: 0.2rem;
+input[type="checkbox"]:hover {
+  background: linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  border: none;
+  z-index: 0;
+  position: relative;
+}
+
+input[type="checkbox"]:hover::before {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  content: "";
+  border: none;
+  background-color: hsl(235, 24%, 19%);
+  border-radius: 50%;
+  width: calc(1.1rem - 2px);
+  height: calc(1.1rem - 2px);
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+input[type="checkbox"]:checked {
+  background: url("images/icon-check.svg") center no-repeat,
+    linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  border: none;
+}
+
+input[type="checkbox"]:checked:before{
+  visibility: hidden;
+}
+
+input[type="checkbox"] + label {
+  flex-grow: 1;
+  padding: 1rem;
+  height: 100%;
 }
 
 .delete {
-  width: 0.8rem;
+  flex-basis: 0.8rem;
   height: 0.8rem;
+  padding-left: 1rem;
 }
 
-.checked {
+input[type="checkbox"]:checked + label {
   text-decoration: line-through;
   color: hsl(233, 14%, 35%);
 }
@@ -139,22 +206,25 @@ li:last-of-type {
   color: hsl(233, 14%, 35%);
 }
 
-.sort-buttons {
+.filter-buttons {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   border: none;
   outline: none;
-  padding: 1rem;
+  padding: 1rem 3rem;
   height: 3rem;
+  color: hsl(233, 14%, 35%);
+  font-weight: bold;
 }
 
-.selected-sort{
+.selected-filter {
   color: hsl(220, 98%, 61%);
 }
 
-.reorder-instructions{
-  color:hsl(237, 14%, 26%);
+.reorder-instructions {
+  margin-top: 2rem;
+  color: hsl(233, 14%, 35%);
   text-align: center;
 }
 
