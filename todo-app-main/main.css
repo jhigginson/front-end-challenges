@@ -1,26 +1,46 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
 
-:root{
+:root {
   --primary-color: hsl(220, 98%, 61%);
   --check-background: linear-gradient(
     135deg,
     hsl(192, 100%, 67%),
     hsl(280, 87%, 65%)
   );
+  --mobile-bg: url("images/bg-mobile-dark.jpg");
+  --desktop-bg: url("images/bg-desktop-dark.jpg");
+  --dark-mode-toggle: url("images/icon-sun.svg");
+  --body-bg: hsl(235, 21%, 11%);
+  --box-bg: hsl(235, 24%, 19%);
+  --circles: hsl(237, 14%, 26%);
+  --placeholder-text: hsl(234, 11%, 52%);
+  --completed-text: hsl(233, 14%, 35%);
+  --main-text: hsl(234, 39%, 85%);
+  --hover-text: hsl(236, 33%, 92%);
+  --info-bar-text: hsl(233, 14%, 35%);
+  --border-color: hsl(237, 14%, 26%);
+  --filter-bar-text: hsl(234, 11%, 52%);
+  --reorder-text: hsl(233, 14%, 35%);
+  --delete-color: hsl(234, 11%, 52%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --mobile-bg: url("images/bg-mobile-dark.jpg");
     --desktop-bg: url("images/bg-desktop-dark.jpg");
+    --dark-mode-toggle: url("images/icon-sun.svg");
     --body-bg: hsl(235, 21%, 11%);
     --box-bg: hsl(235, 24%, 19%);
-    --body-text: hsl(234, 39%, 85%);
-    --body-text-hover: hsl(236, 33%, 92%);
-    --secondary-text: hsl(234, 11%, 52%);
-    --tertiary-text: hsl(233, 14%, 35%);
+    --circles: hsl(237, 14%, 26%);
+    --placeholder-text: hsl(234, 11%, 52%);
+    --completed-text: hsl(233, 14%, 35%);
+    --main-text: hsl(234, 39%, 85%);
+    --hover-text: hsl(236, 33%, 92%);
+    --info-bar-text: hsl(233, 14%, 35%);
     --border-color: hsl(237, 14%, 26%);
-    --dark-mode-toggle: url("images/icon-sun.svg")
+    --filter-bar-text: hsl(234, 11%, 52%);
+    --reorder-text: hsl(233, 14%, 35%);
+    --delete-color: hsl(234, 11%, 52%);
   }
 }
 
@@ -28,14 +48,19 @@
   :root {
     --mobile-bg: url("images/bg-mobile-light.jpg");
     --desktop-bg: url("images/bg-desktop-light.jpg");
+    --dark-mode-toggle: url("images/icon-moon.svg");
     --body-bg: hsl(236, 33%, 92%);
     --box-bg: hsl(0, 0%, 98%);
-    --body-text:  hsl(235, 19%, 35%);
-    --body-text-hover: hsl(236, 33%, 92%);
-    --secondary-text:hsl(236, 33%, 92%);
-    --tertiary-text: hsl(233, 11%, 84%);
+    --circles: hsl(233, 11%, 84%);
+    --placeholder-text: hsl(236, 9%, 61%);
+    --completed-text: hsl(233, 11%, 84%);
+    --main-text: hsl(235, 19%, 35%);
+    --hover-text: hsl(235, 19%, 35%);
+    --info-bar-text: hsl(236, 9%, 61%);
     --border-color: hsl(233, 11%, 84%);
-    --dark-mode-toggle: url("images/icon-moon.svg")
+    --filter-bar-text: hsl(236, 9%, 61%);
+    --reorder-text: hsl(236, 9%, 61%);
+    --delete-color: hsl(236, 9%, 61%);
   }
 }
 
@@ -50,7 +75,7 @@ a {
 
 a:hover,
 a:active {
-  color: var(--body-text-hover);
+  color: var(--hover-text);
   cursor: pointer;
 }
 
@@ -66,9 +91,8 @@ body {
   justify-content: flex-start;
   font-family: "Josefin Sans", sans-serif;
   font-size: 1.125rem;
-  background: var(--mobile-bg) top/contain no-repeat,
-    var(--body-bg);
-  color: var(--body-text);
+  background: var(--mobile-bg) top/contain no-repeat, var(--body-bg);
+  color: var(--main-text);
   margin: 0;
   padding: 1.9rem 1.7rem 1.2rem 1.7rem;
   width: auto;
@@ -87,11 +111,10 @@ header h1 {
   letter-spacing: 0.5rem;
 }
 
-.dark-mode-toggler{
+.dark-mode-toggler {
   width: 1.2rem;
   height: 1.2rem;
   content: var(--dark-mode-toggle);
-  
 }
 
 button,
@@ -134,13 +157,13 @@ main {
 }
 
 ::placeholder {
-  color: var(--secondary-text);
+  color: var(--placeholder-text);
   opacity: 1; /*for firefox*/
 }
 
 .circle {
   background: transparent;
-  border: 1px solid var(--tertiary-text);
+  border: 1px solid var(--circles);
   border-radius: 50%;
   width: 1.1rem;
   height: 1.1rem;
@@ -155,7 +178,7 @@ ul {
   list-style: none;
   margin-top: 1.2rem;
   padding: 0;
-  box-shadow: 0 6rem 30px 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 30px 8px rgba(0, 0, 0, 0.1);
 }
 
 li {
@@ -175,11 +198,11 @@ li:first-of-type {
 li:last-of-type {
   border-bottom: none;
   border-radius: 0 0 5px 5px;
-  color: var(--tertiary-text);
+  color: var(--info-bar-text);
 }
 
 input[type="checkbox"] {
-  border: 1px solid var(--tertiary-text);
+  border: 1px solid var(--circles);
   background: transparent;
   border-radius: 50%;
   width: 1.1rem;
@@ -198,8 +221,7 @@ input[type="checkbox"] + label:hover {
 }
 
 input[type="checkbox"]:hover {
-  background: linear-gradient(var(--box-bg), var(--box-bg))
-      padding-box,
+  background: linear-gradient(var(--box-bg), var(--box-bg)) padding-box,
     var(--check-background) border-box;
   border: 1px solid transparent;
 }
@@ -219,10 +241,11 @@ input[type="checkbox"] + label {
 
 input[type="checkbox"]:checked + label {
   text-decoration: line-through;
-  color: var(--tertiary-text);
+  color: var(--completed-text);
 }
 
 .delete {
+  color: var(--delete-color);
   flex-basis: 0.8rem;
   height: 0.8rem;
   padding-left: 1rem;
@@ -237,7 +260,7 @@ input[type="checkbox"]:checked + label {
   outline: none;
   padding: 1rem 3rem;
   height: 3rem;
-  color: var(--secondary-text);
+  color: var(--filter-bar-text);
   font-weight: bold;
 }
 
@@ -247,7 +270,7 @@ input[type="checkbox"]:checked + label {
 
 .reorder-instructions {
   margin-top: 2rem;
-  color: var(--tertiary-text);
+  color: var(--reorder-text);
   text-align: center;
 }
 
@@ -257,8 +280,7 @@ footer {
 
 @media (min-width: 40rem) {
   body {
-    background: var(--desktop-bg) top/contain no-repeat,
-    var(--body-bg);
+    background: var(--desktop-bg) top/contain no-repeat, var(--body-bg);
     width: 37.5%;
     min-width: 25rem;
     max-width: 40rem;
@@ -302,7 +324,7 @@ footer {
   ul {
     margin-top: 1.4rem;
     padding: 0;
-    box-shadow: 0 1rem 30px 1rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 30px 8px rgba(0, 0, 0, 0.1);
   }
 
   li {
@@ -338,7 +360,7 @@ footer {
 
   .reorder-instructions {
     margin-top: 2rem;
-    color: var(--tertiary-text);
+    color: var(--reorder-text);
     font-size: 75%;
   }
 
