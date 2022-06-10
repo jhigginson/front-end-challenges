@@ -1,0 +1,35 @@
+.dark {
+  --mobile-bg: url("/images/bg-mobile-dark.jpg");
+  --desktop-bg: url("/images/bg-desktop-dark.jpg");
+  --dark-mode-toggle: url("/images/icon-sun.svg");
+  --body-bg: hsl(235, 21%, 11%);
+  --box-bg: hsl(235, 24%, 19%);
+  --circles: hsl(237, 14%, 26%);
+  --placeholder-text: hsl(234, 11%, 52%);
+  --completed-text: hsl(233, 14%, 35%);
+  --main-text: hsl(234, 39%, 85%);
+  --hover-text: hsl(236, 33%, 92%);
+  --info-bar-text: hsl(234, 11%, 52%);
+  --border-color: hsl(237, 14%, 26%);
+  --filter-bar-text: hsl(234, 11%, 52%);
+  --reorder-text: hsl(233, 14%, 35%);
+  --delete-color: hsl(234, 11%, 52%);
+}
+
+.light {
+  --mobile-bg: url("/images/bg-mobile-light.jpg");
+  --desktop-bg: url("/images/bg-desktop-light.jpg");
+  --dark-mode-toggle: url("/images/icon-moon.svg");
+  --body-bg: hsl(236, 33%, 92%);
+  --box-bg: hsl(0, 0%, 98%);
+  --circles: hsl(233, 11%, 84%);
+  --placeholder-text: hsl(236, 9%, 61%);
+  --completed-text: hsl(233, 11%, 84%);
+  --main-text: hsl(235, 19%, 35%);
+  --hover-text: hsl(235, 19%, 35%);
+  --info-bar-text: hsl(236, 9%, 61%);
+  --border-color: hsl(233, 11%, 84%);
+  --filter-bar-text: hsl(236, 9%, 61%);
+  --reorder-text: hsl(236, 9%, 61%);
+  --delete-color: hsl(236, 9%, 61%);
+}

@@ -1,10 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
 
-
 * {
   box-sizing: border-box;
 }
-
 
 :root {
   --primary-color: hsl(220, 98%, 61%);
@@ -13,21 +11,6 @@
     hsl(192, 100%, 67%),
     hsl(280, 87%, 65%)
   );
-  --mobile-bg: url("/images/bg-mobile-dark.jpg");
-  --desktop-bg: url("/images/bg-desktop-dark.jpg");
-  --dark-mode-toggle: url("/images/icon-sun.svg");
-  --body-bg: hsl(235, 21%, 11%);
-  --box-bg: hsl(235, 24%, 19%);
-  --circles: hsl(237, 14%, 26%);
-  --placeholder-text: hsl(234, 11%, 52%);
-  --completed-text: hsl(233, 14%, 35%);
-  --main-text: hsl(234, 39%, 85%);
-  --hover-text: hsl(236, 33%, 92%);
-  --info-bar-text: hsl(233, 14%, 35%);
-  --border-color: hsl(237, 14%, 26%);
-  --filter-bar-text: hsl(234, 11%, 52%);
-  --reorder-text: hsl(233, 14%, 35%);
-  --delete-color: hsl(234, 11%, 52%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,7 +25,7 @@
     --completed-text: hsl(233, 14%, 35%);
     --main-text: hsl(234, 39%, 85%);
     --hover-text: hsl(236, 33%, 92%);
-    --info-bar-text: hsl(233, 14%, 35%);
+    --info-bar-text: hsl(234, 11%, 52%);
     --border-color: hsl(237, 14%, 26%);
     --filter-bar-text: hsl(234, 11%, 52%);
     --reorder-text: hsl(233, 14%, 35%);
@@ -70,7 +53,6 @@
   }
 }
 
-
 html {
   height: 100%;
   padding: 0;
@@ -78,11 +60,8 @@ html {
 }
 
 body {
-
   font-family: "Josefin Sans", sans-serif;
   font-size: 1.125rem;
-  background: var(--mobile-bg) top/contain no-repeat, var(--body-bg);
-  color: var(--main-text);
   margin: 0;
   padding: 0;
   width: 100%;
@@ -100,7 +79,6 @@ a:active {
   cursor: pointer;
 }
 
-
 header {
   display: flex;
   justify-content: space-between;
@@ -117,6 +95,7 @@ header h1 {
   width: 1.2rem;
   height: 1.2rem;
   content: var(--dark-mode-toggle);
+  cursor: pointer;
 }
 
 button,
@@ -140,13 +119,18 @@ textarea {
 }
 
 @media (min-width: 40rem) {
-  body {
-    background: var(--desktop-bg) top/contain no-repeat, var(--body-bg);
-
+  header,
+  main,
+  footer {
+    width: 38%;
+    min-width: 25rem;
+    max-width: 40rem;
+    padding: 0;
+    margin: 0 auto;
   }
 
   header {
-    margin-top: 3.2rem;
+    margin-top: 3.4rem;
   }
 
   header h1 {

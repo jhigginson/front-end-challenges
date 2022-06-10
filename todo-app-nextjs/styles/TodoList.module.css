@@ -1,3 +1,4 @@
+
 .rounded-box {
   border-radius: 5px;
   background: var(--box-bg);
@@ -31,6 +32,11 @@
   border-bottom: none;
   border-radius: 0 0 5px 5px;
   color: var(--info-bar-text);
+}
+
+.todo-list-item:last-of-type,
+.filter-buttons {
+  letter-spacing: -0.5px;
 }
 
 .checkbox {
@@ -113,7 +119,7 @@
   .todo-list {
     margin-top: 1.4rem;
     padding: 0;
-    box-shadow: 0 8px 30px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1rem 30px 8px rgba(0, 0, 0, 0.2);
   }
 
   .todo-list-item {
@@ -122,8 +128,16 @@
   }
 
   .todo-list-item:last-of-type {
-    font-size: 90%;
+    font-size: 75%;
     height: 3rem;
+  }
+
+  .todo-list-item:last-of-type > div,
+  .todo-list-item:last-of-type > a{
+    min-width: 29%;
+  }
+  .todo-list-item:last-of-type > a{
+    text-align: right;
   }
 
   .checkbox {
@@ -148,8 +162,16 @@
     visibility: visible;
   }
 
+  .filter-buttons{
+    padding: 0;
+    flex-basis: 10rem;
+    flex-grow: 1;
+    /* margin: 0 1rem; */
+  }
+  
+
   .reorder-instructions {
-    margin-top: 2rem;
+    margin-top: 3.5rem;
     color: var(--reorder-text);
     font-size: 75%;
   }

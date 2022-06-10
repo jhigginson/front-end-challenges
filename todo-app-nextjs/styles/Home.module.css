@@ -5,6 +5,8 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--mobile-bg) top/contain no-repeat, var(--body-bg);
+  color: var(--main-text);
 }
 
 .main-section {
@@ -28,11 +30,8 @@
 @media (min-width: 40rem) {
 
   .container{
-    width: 37.5%;
-    min-width: 25rem;
-    max-width: 40rem;
+    background: var(--desktop-bg) top/contain no-repeat, var(--body-bg);
     padding: 0;
-    margin: 0 auto;
   }
 
   .main-section {

@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import Head from 'next/head';
 import Image from 'next/image';
 import TodoHeader from '../components/TodoHeader';
 import NewTodoInput from '../components/NewTodoInput';
 import TodoList from "../components/TodoList";
 import styles from '../styles/Home.module.css';
+import colorStyles from '../styles/colors.module.css';
 import mockTodo from '../mock-todo';
+import { colorModeContext } from "../context/ColorModeProvider";
 
 
 function getRandomInt(max) {
@@ -15,9 +17,11 @@ function getRandomInt(max) {
 export default function Home() {
   const [todoList, setTodoList] = useState(mockTodo);
 
+  const colorCtx = useContext(colorModeContext);
+
   const handleNewTodo = (todoItem) => {
     let randId = 0;
-    while(todoList.find(item => item.id === randId)){
+    while (todoList.find(item => item.id === randId)) {
       randId = getRandomInt(100000);
     }
     setTodoList(prev => [...prev, { id: randId, text: todoItem, completed: false }]);
@@ -30,7 +34,7 @@ export default function Home() {
   const handleToggleChecked = (index) => {
     setTodoList(prev => {
       let itemToCheck = prev.find(item => item.id === index);
-      let completed = {id: itemToCheck.id, text: itemToCheck.text, completed: !itemToCheck.completed };
+      let completed = { id: itemToCheck.id, text: itemToCheck.text, completed: !itemToCheck.completed };
       let newTodos = [...prev];
       newTodos[newTodos.indexOf(itemToCheck)] = completed;
       return newTodos;
@@ -42,7 +46,8 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
+
+    <div className={`${styles.container} ${colorStyles[colorCtx.colorMode]}`}>
       <Head>
         <title>Frontend Mentor | Todo app</title>
         <meta name="description" content="A Frontend Mentor Challenge coded by John Higginson" />
