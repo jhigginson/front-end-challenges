@@ -1,0 +1,41 @@
+.rounded-box {
+  border-radius: 5px;
+  background: var(--box-bg);
+  width: auto;
+}
+
+.fake-input {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.input-box {
+  background: transparent;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 1rem;
+  padding-top: 0.2rem;
+  color: inherit;
+  height: 3rem;
+  flex-grow: 1;
+  caret-color: var(--primary-color);
+}
+
+.input-box::placeholder {
+  color: var(--placeholder-text);
+  opacity: 1; /*for firefox*/
+}
+
+@media (min-width: 40rem) {
+  .fake-input {
+    padding-left: 1.5rem;
+  }
+
+  .input-box {
+    padding-left: 1.5rem;
+    height: 4rem;
+  }
+}
