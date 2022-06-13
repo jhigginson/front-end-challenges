@@ -19,7 +19,6 @@ export default function TodoList(props) {
     else if (fltr === "Completed") {
       newItems = props.items.filter(item => item.completed);
     }
-
     setFilteredItems(newItems);
 
   }, [props.items]);
@@ -27,8 +26,6 @@ export default function TodoList(props) {
   useEffect(() => {
     filterItems(filterBy);
   }, [filterItems, filterBy]);
-
-
 
   const handleFilter = (event) => {
     const filter = event.target.innerText;
@@ -44,10 +41,10 @@ export default function TodoList(props) {
 
   return (
     <>
-      <ul className={styles["todo-list"]}>
+      <ul className={styles["todo-list"]} >
 
         {filteredItems.map((item, index) =>
-          <TodoItem item={item} key={index} onDelete={() => props.onDelete(item.id)} onToggleCheck={() => props.onToggleChecked(item.id)} />
+          <TodoItem item={item} key={index} onDelete={() => props.onDelete(item.id)} onToggleCheck={() => props.onToggleChecked(item.id)} onDragAndDrop={props.onReorder} />
         )}
 
         <li className={styles["todo-list-item"]}>
@@ -55,6 +52,7 @@ export default function TodoList(props) {
           {width >= 640 && filters}
           <a onClick={props.onClear}>Clear Completed</a>
         </li>
+
       </ul>
       {width < 640 && filters}
 

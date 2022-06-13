@@ -20,11 +20,8 @@ export default function Home() {
   const colorCtx = useContext(colorModeContext);
 
   const handleNewTodo = (todoItem) => {
-    let randId = 0;
-    while (todoList.find(item => item.id === randId)) {
-      randId = getRandomInt(100000);
-    }
-    setTodoList(prev => [...prev, { id: randId, text: todoItem, completed: false }]);
+    const maxId = Math.max(...todoList.map(i => i.id));
+    setTodoList(prev => [...prev, { id: maxId < 0 ? 0 : maxId + 1, text: todoItem, completed: false }]);
   };
 
   const handleDelete = (idToDel) => {
@@ -40,6 +37,28 @@ export default function Home() {
       return newTodos;
     });
   };
+
+  const handleReorder = (origId, destId) => {
+    if (origId === destId) return;
+    console.log(origId + " -> " + destId);
+    const reorderedItems = [...todoList];
+
+    const draggedItem = reorderedItems.find(i => i.id === origId); //== isn't a typo, need type coersion
+    const droppedOnItem = reorderedItems.find(i => i.id === destId);
+    reorderedItems.splice(reorderedItems.indexOf(draggedItem), 1);
+    const newDestId = reorderedItems.indexOf(droppedOnItem);
+    console.log("new index of dropped on item" + newDestId);
+    if (origId < destId) {
+      //insert it after dest
+      reorderedItems.splice(newDestId + 1, 0, draggedItem);
+    } else if (origId > destId) {
+      //insert it before dest
+      reorderedItems.splice(newDestId, 0, draggedItem);
+    }
+
+    setTodoList(reorderedItems.map((elem, index) => { return { ...elem, id: index } }));
+
+  }
 
   const handleClear = () => {
     setTodoList(prev => prev.filter(item => !item.completed));
@@ -64,14 +83,15 @@ export default function Home() {
 
       <main className={styles["main-section"]}>
         <NewTodoInput onSubmit={handleNewTodo} />
-        <TodoList items={todoList} onDelete={handleDelete} onToggleChecked={handleToggleChecked} onClear={handleClear} />
+        <TodoList items={todoList} onDelete={handleDelete} onToggleChecked={handleToggleChecked} onClear={handleClear} onReorder={handleReorder} />
       </main>
+
       <footer className={styles.attribution}>
-        Challenge by
-        <a href="https://www.frontendmentor.io?ref=challenge"
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge"
         >Frontend Mentor</a
         >. Coded by <a href="#">John Higginson</a>
       </footer>
+
     </div>
   );
 }
