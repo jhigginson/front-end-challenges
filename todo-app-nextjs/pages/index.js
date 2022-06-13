@@ -40,14 +40,12 @@ export default function Home() {
 
   const handleReorder = (origId, destId) => {
     if (origId === destId) return;
-    console.log(origId + " -> " + destId);
     const reorderedItems = [...todoList];
 
     const draggedItem = reorderedItems.find(i => i.id === origId); //== isn't a typo, need type coersion
     const droppedOnItem = reorderedItems.find(i => i.id === destId);
     reorderedItems.splice(reorderedItems.indexOf(draggedItem), 1);
     const newDestId = reorderedItems.indexOf(droppedOnItem);
-    console.log("new index of dropped on item" + newDestId);
     if (origId < destId) {
       //insert it after dest
       reorderedItems.splice(newDestId + 1, 0, draggedItem);

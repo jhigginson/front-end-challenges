@@ -21,7 +21,7 @@ export default function TodoList(props) {
     }
     setFilteredItems(newItems);
 
-  }, [props.items]);
+  }, [props.items, setFilteredItems]);
 
   useEffect(() => {
     filterItems(filterBy);
