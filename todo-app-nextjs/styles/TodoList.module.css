@@ -109,6 +109,7 @@
 }
 
 .reorder-instructions {
+  display: none;
   margin-top: 2rem;
   color: var(--reorder-text);
   text-align: center;
@@ -174,5 +175,11 @@
     margin-top: 3.5rem;
     color: var(--reorder-text);
     font-size: 75%;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reorder-instructions {
+    display: block;
   }
 }
