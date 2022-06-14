@@ -34,7 +34,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://www.frontendmentor.io/solutions/nextjs-react-with-responsive-design-dark-mode-and-drag-and-drop-AgJt8L6r_j](https://www.frontendmentor.io/solutions/nextjs-react-with-responsive-design-dark-mode-and-drag-and-drop-AgJt8L6r_j)
-- Live Site URL: [https://frontend-mentor-todo-rho.vercel.com](https://frontend-mentor-todo-rho.vercel.com)
+- Live Site URL: [https://frontend-mentor-todo-rho.vercel.com](https://frontend-mentor-todo-rho.vercel.app)
 
 ## My process
 
