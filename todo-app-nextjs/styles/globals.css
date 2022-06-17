@@ -147,4 +147,25 @@ textarea {
     width: 1.6rem;
     height: 1.6rem;
   }
+
+  .sunset {
+    animation: sunset 500ms ease-out forwards;
+  }
+
+  .sunrise {
+    animation: sunset 500ms reverse ease-in;
+  }
+}
+
+@keyframes sunset {
+  0%{
+    transform-origin: 50% 50%;
+    transform: translateY(0) rotate(0deg) scale(1.0);
+    opacity: 100%;
+  }
+  100%{
+    transform-origin: 50% 50%;
+    transform: translateY(4rem) rotate(90deg) scale(0.5);
+    opacity: 0%;
+  }
 }

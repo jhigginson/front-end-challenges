@@ -6,7 +6,6 @@ export const colorModeContext = createContext({ colorMode: "", toggle: () => { }
 const ColorModeProvider = ({ children }) => {
   const [colorMode, setColorMode] = useState("dark");
 
-
   useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const useDarkMode = mq.matches;
@@ -20,6 +19,7 @@ const ColorModeProvider = ({ children }) => {
 
   const toggleColorMode = () => {
     // console.log(`toggling color mode from ${colorMode}`)
+
     setColorMode(prev => {
       if (prev === "dark") {
         setColorMode("light");
@@ -28,6 +28,8 @@ const ColorModeProvider = ({ children }) => {
       }
     });
   };
+
+
 
   return (
     <colorModeContext.Provider value={{ colorMode: colorMode, toggle: toggleColorMode }}>
