@@ -15,7 +15,7 @@ export default function TodoHeader(props) {
     if(isSunsetting){
       setIsSunsetting(false);
       colorCtx.toggle();
-       setTimeout(()=> setIsSunrising(true), 10);
+       setTimeout(()=> setIsSunrising(true), 50);
     }else if(isSunrising){
       setIsSunrising(false);
     }
