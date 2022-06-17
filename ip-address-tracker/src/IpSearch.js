@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./IpSearch.css";
 
 
@@ -11,6 +11,7 @@ const isIP = (input) => {
 }
 
 const callIpify = (input, doAfter) => {
+  console.log("ipify called");
   const api_key = process.env.REACT_APP_IPIFY_KEY;
   const api_url = 'https://geo.ipify.org/api/v2/country,city?';
   let requestField = "";
@@ -33,6 +34,7 @@ const callIpify = (input, doAfter) => {
     .then(doAfter)
     .catch((e) => {
       console.error(e);
+      return false;
     });
 }
 
@@ -41,6 +43,7 @@ const callIpify = (input, doAfter) => {
 const IpSearch = (props) => {
 
   const [inputText, setInputText] = useState("");
+  const [isInitialIPLoaded, setIsInitialIPLoaded] = useState(false);
 
   const fillInfo = (data) => {
     if (data.ip) {
@@ -60,12 +63,14 @@ const IpSearch = (props) => {
   };
 
   useEffect(() => {
-    callIpify("", fillInfo);
+    if (!isInitialIPLoaded) {
+      callIpify("", fillInfo);
+      setIsInitialIPLoaded(true);
+    }
   }, [])
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(inputText);
     callIpify(inputText, fillInfo);
     setInputText("");
   };
