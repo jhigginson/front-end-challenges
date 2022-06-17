@@ -20,17 +20,18 @@ const getInitialTodos = () => {
 
 export default function Home() {
   const [todoList, setTodoList] = useState([]);
-
+  const [isWindowLoaded, setIsWindowLoaded] = useState(false);
   const colorCtx = useContext(colorModeContext);
 
   useEffect(() => {
-    if(todoList.length === 0){
+    if(!isWindowLoaded){
       setTodoList(getInitialTodos());
+      setIsWindowLoaded(true);
     }
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && todoList.length > 0) {
+    if (typeof window !== 'undefined' && isWindowLoaded) {
       window.localStorage.setItem('todoList', JSON.stringify(todoList));
     }
   }, [todoList]);
