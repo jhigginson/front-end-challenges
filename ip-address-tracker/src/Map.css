@@ -1,0 +1,10 @@
+
+.leaflet-container {
+  height: 65%;
+  /* background-color: green; */
+  z-index: 0;
+}
+
+.leaflet-marker-icon{
+  fill: pink;
+}

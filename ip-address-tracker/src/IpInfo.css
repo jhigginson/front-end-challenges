@@ -1,0 +1,87 @@
+.ip-info {
+  height: 18rem;
+  border-radius: 16px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 1.8rem;
+  background-color: white;
+  color: hsl(0, 0%, 17%);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  z-index: 1;
+}
+
+.ip-info__item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.ip-info__item--heading {
+  color: hsl(0, 0%, 59%);
+  margin: 0;
+  padding: 0;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ip-info__item--text {
+  font-weight: bold;
+  margin: 0;
+  margin-top: 0.5rem;
+  padding: 0;
+}
+
+@media (min-width: 40rem) {
+  .ip-info {
+    height: 10rem;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 70rem;
+    margin-top: 3rem;
+  }
+
+  .ip-info__item {
+    flex-basis: 25%;
+    /* flex-grow: 1; */
+    text-align: left;
+    justify-content: start;
+    /* border-left: 1px solid hsl(0, 0%, 59%); */
+    height: 100%;
+    padding: 2.1rem 2%;
+    /* padding-right: 0;
+    padding-bottom: 0; */
+    position: relative;
+  }
+
+  .ip-info__item:after {
+    content: "";
+    background: hsl(0, 0%, 59%, 20%);
+    position: absolute;
+    bottom: 26%;
+    left: 0;
+    height: 48%;
+    width: 1px;
+  }
+
+  .ip-info__item:first-of-type:after {
+    background: none;
+    width: 0;
+  }
+
+  .ip-info__item:first-of-type {
+    border: none;
+  }
+  .ip-info__item--heading {
+    font-size: 0.7rem;
+  }
+  .ip-info__item--text {
+    padding-top: 0.7rem;
+    font-size: 1.4rem;
+  }
+}

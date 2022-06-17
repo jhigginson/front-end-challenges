@@ -1,0 +1,44 @@
+.App-header {
+  background: url("../public/images/pattern-bg.png") center/cover no-repeat
+      border-box,
+    #4f59bb;
+  height: 35%;
+}
+
+ h1 {
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding-top: 1.4rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.overlay{ 
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.attribution {
+  display: none;
+  font-size: 11px;
+  text-align: center;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+@media(min-width:40rem){
+  h1{
+    padding-top: 2.25rem;
+  }
+  .overlay{
+    width:76%;
+    left: 12%;
+  }
+}
