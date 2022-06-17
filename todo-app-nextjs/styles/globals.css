@@ -17,7 +17,6 @@
   :root {
     --mobile-bg: url("/images/bg-mobile-dark.jpg");
     --desktop-bg: url("/images/bg-desktop-dark.jpg");
-    --dark-mode-toggle: url("/images/icon-sun.svg");
     --body-bg: hsl(235, 21%, 11%);
     --box-bg: hsl(235, 24%, 19%);
     --circles: hsl(237, 14%, 26%);
@@ -37,7 +36,6 @@
   :root {
     --mobile-bg: url("/images/bg-mobile-light.jpg");
     --desktop-bg: url("/images/bg-desktop-light.jpg");
-    --dark-mode-toggle: url("/images/icon-moon.svg");
     --body-bg: hsl(236, 33%, 92%);
     --box-bg: hsl(0, 0%, 98%);
     --circles: hsl(233, 11%, 84%);

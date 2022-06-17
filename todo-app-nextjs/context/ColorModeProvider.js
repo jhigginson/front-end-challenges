@@ -2,23 +2,24 @@ import { useState, useEffect, createContext } from "react";
 
 export const colorModeContext = createContext({ colorMode: "", toggle: () => { } });
 
+const getInitialState = () => {
+  let useDarkMode = true;
+  if (typeof window !== 'undefined' && localStorage["colorMode"]) {
+    useDarkMode = localStorage["colorMode"] === "dark";
+  } else if (typeof window !== 'undefined') {
+    useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  if (useDarkMode) {
+    return ("dark");
+  } else {
+    return ("light");
+  }
+}
 
 const ColorModeProvider = ({ children }) => {
-  const [colorMode, setColorMode] = useState("dark");
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const useDarkMode = mq.matches;
-    // console.log(`prefers-color-scheme dark?: ${useDarkMode}`);
-    if (useDarkMode) {
-      setColorMode("dark");
-    } else {
-      setColorMode("light");
-    }
-  }, [])
+  const [colorMode, setColorMode] = useState("");
 
   const toggleColorMode = () => {
-    // console.log(`toggling color mode from ${colorMode}`)
 
     setColorMode(prev => {
       if (prev === "dark") {
@@ -29,6 +30,18 @@ const ColorModeProvider = ({ children }) => {
     });
 
   };
+
+  useEffect(() => {
+    if (colorMode === "") {
+      setColorMode(getInitialState());
+    }
+  }, [])
+
+  useEffect(() => {
+    if (colorMode !== "") {
+      localStorage.setItem('colorMode', colorMode);
+    }
+  }, [colorMode]);
 
 
 

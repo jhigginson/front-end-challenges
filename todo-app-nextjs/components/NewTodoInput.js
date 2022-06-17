@@ -7,8 +7,6 @@ export default function NewTodoInput(props) {
   const handleNewTodo = (event) => {
     event.preventDefault(); //prevent page refresh
 
-    // console.log(newTodoItem);
-
     props.onSubmit(newTodoItem);
     setNewTodoItem("");
   };

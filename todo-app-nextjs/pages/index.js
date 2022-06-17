@@ -10,14 +10,30 @@ import mockTodo from '../mock-todo';
 import { colorModeContext } from "../context/ColorModeProvider";
 
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
+const getInitialTodos = () => { 
+  let todoList = mockTodo;
+  if (typeof window !== 'undefined' && window.localStorage["todoList"]) {
+    todoList = JSON.parse(window.localStorage["todoList"]);
+  }
+  return todoList;
+ }
 
 export default function Home() {
-  const [todoList, setTodoList] = useState(mockTodo);
+  const [todoList, setTodoList] = useState([]);
 
   const colorCtx = useContext(colorModeContext);
+
+  useEffect(() => {
+    if(todoList.length === 0){
+      setTodoList(getInitialTodos());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && todoList.length > 0) {
+      window.localStorage.setItem('todoList', JSON.stringify(todoList));
+    }
+  }, [todoList]);
 
   const handleNewTodo = (todoItem) => {
     const maxId = Math.max(...todoList.map(i => i.id));
@@ -42,7 +58,7 @@ export default function Home() {
     if (origId === destId) return;
     const reorderedItems = [...todoList];
 
-    const draggedItem = reorderedItems.find(i => i.id === origId); //== isn't a typo, need type coersion
+    const draggedItem = reorderedItems.find(i => i.id === origId);
     const droppedOnItem = reorderedItems.find(i => i.id === destId);
     reorderedItems.splice(reorderedItems.indexOf(draggedItem), 1);
     const newDestId = reorderedItems.indexOf(droppedOnItem);
@@ -93,5 +109,3 @@ export default function Home() {
     </div>
   );
 }
-
-
