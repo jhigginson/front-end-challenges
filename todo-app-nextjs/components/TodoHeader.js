@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { colorModeContext } from "../context/ColorModeProvider";
 
 export default function TodoHeader(props) {
@@ -12,14 +12,19 @@ export default function TodoHeader(props) {
   };
 
   const handleAnimEnd = () => {
-    if(isSunsetting){
+    if (isSunsetting) {
+      console.log("sunset ended");
       setIsSunsetting(false);
       colorCtx.toggle();
-       setTimeout(()=> setIsSunrising(true), 50);
-    }else if(isSunrising){
+    } else if (isSunrising) {
+      console.log("sunrise ended");
       setIsSunrising(false);
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => setIsSunrising(true), 10);
+  }, [colorCtx.colorMode]);
 
   return (
     <header>

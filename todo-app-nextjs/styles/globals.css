@@ -153,7 +153,7 @@ textarea {
   }
 
   .sunrise {
-    animation: sunset 500ms reverse ease-in;
+    animation: sunset 500ms reverse ease-in forwards;
   }
 }
 

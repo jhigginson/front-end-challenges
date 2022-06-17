@@ -27,6 +27,7 @@ const ColorModeProvider = ({ children }) => {
         setColorMode("dark");
       }
     });
+
   };
 
 
