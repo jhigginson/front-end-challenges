@@ -45,6 +45,11 @@ export default function Home() {
     setTodoList(prev => prev.filter((item) => item.id != idToDel));
   };
 
+  const handleClear = () => {
+    setTodoList(prev => prev.filter(item => !item.completed));
+  };
+
+
   const handleToggleChecked = (index) => {
     setTodoList(prev => {
       let itemToCheck = prev.find(item => item.id === index);
@@ -74,10 +79,6 @@ export default function Home() {
     setTodoList(reorderedItems.map((elem, index) => { return { ...elem, id: index } }));
 
   }
-
-  const handleClear = () => {
-    setTodoList(prev => prev.filter(item => !item.completed));
-  };
 
   return (
 

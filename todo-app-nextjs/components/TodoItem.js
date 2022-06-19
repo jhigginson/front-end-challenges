@@ -1,6 +1,9 @@
 import styles from "../styles/TodoList.module.css";
+import { useState } from 'react';
 
 export default function TodoItem(props) {
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDrop = (event, droppedId) => {
     event.preventDefault();
@@ -20,25 +23,38 @@ export default function TodoItem(props) {
     event.dataTransfer.setData("DraggedID", event.target.id);
   };
 
+  const beginDeleteAnim = () => {
+    setIsDeleting(true);
+  }
+
+  const handleAnimEnd = (event) => {
+    console.log(event);
+    if(event.animationName.includes("getsmaller")){
+      props.onDelete();
+    }
+
+  }
+
   return (
     <li id={`todo-item-${props.item.id}`}
-      className={styles["todo-list-item"]}
+      className={`${styles["todo-list-item"]}${isDeleting ? ' ' + styles['delete-anim'] : ""}`}
       draggable="true"
       onDrop={(e) => handleDrop(e, props.item.id)}
       onDragOver={handleDragOver}
-      onDragStart={handleDragStart}>
-
+      onDragStart={handleDragStart}
+      onAnimationEnd={handleAnimEnd}>
       <input type="checkbox"
         className={styles.checkbox}
         id={`checkbox${props.item.id}`}
         checked={props.item.completed}
-        onChange={props.onToggleCheck} />
+        onChange={props.onToggleCheck} 
+         />
 
       <label htmlFor={`checkbox${props.item.id}`}>{props.item.text}</label>
 
       <img className={styles.delete}
         src="/images/icon-cross.svg"
-        onClick={props.onDelete} draggable="false" />
+        onClick={beginDeleteAnim} draggable="false" />
 
     </li>);
 }

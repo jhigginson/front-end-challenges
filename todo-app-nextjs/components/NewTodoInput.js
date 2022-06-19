@@ -6,9 +6,11 @@ export default function NewTodoInput(props) {
 
   const handleNewTodo = (event) => {
     event.preventDefault(); //prevent page refresh
+    if (newTodoItem.trim() !== "") {
+      props.onSubmit(newTodoItem.trim());
+      setNewTodoItem("");
+    }
 
-    props.onSubmit(newTodoItem);
-    setNewTodoItem("");
   };
 
   return (
@@ -23,6 +25,7 @@ export default function NewTodoInput(props) {
           placeholder="Create a new todo..."
           onChange={event => setNewTodoItem(event.target.value)}
           value={newTodoItem}
+          required
         />
       </div>
       <input type="submit" hidden />
