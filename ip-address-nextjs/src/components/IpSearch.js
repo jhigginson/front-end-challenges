@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import "./IpSearch.css";
-
+import { useEffect, useState } from "react";
+import { publicIpv4 } from 'public-ip';
 
 const isDomain = (input) => {
   return /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9])$/.test(input);
@@ -10,9 +9,9 @@ const isIP = (input) => {
   return /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(input);
 }
 
-const callIpify = (input, doAfter) => {
-  const api_key = process.env.REACT_APP_IPIFY_KEY;
-  const api_url = 'https://geo.ipify.org/api/v2/country,city?';
+const callApi = async (input, doAfter) => {
+  console.log("local api called");
+  const api_url = '/api/ipinfo?';
   let requestField = "";
   if (isIP(input)) {
     requestField = '&ipAddress=';
@@ -26,51 +25,47 @@ const callIpify = (input, doAfter) => {
     return false;
   }
 
-  const url = `${api_url}apiKey=${api_key}${requestField}${input}`;
+  const url = `${api_url}${requestField}${input}`;
   console.log(url);
-  fetch(url)
-    .then(response => response.json())
-    .then(doAfter)
-    .catch((e) => {
-      console.error(e);
-    });
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 }
 
 
 
-const IpSearch = (props) => {
+const IpSearch = ({ onSubmit }) => {
 
   const [inputText, setInputText] = useState("");
-
-  const fillInfo = (data) => {
-    if (data.ip) {
-      // console.log(data);
-      const locInfo = {
-        ip: data.ip,
-        location: `${data.location.city}, ${data.location.region} ${data.location.postalCode}`,
-        timezone: `UTC ${data.location.timezone}`,
-        isp: data.isp,
-        lat: data.location.lat,
-        long: data.location.lng
-      };
-      props.onSubmit(locInfo);
-    } else {
-      alert("Hmm... something went wrong with calling the API.");
-    }
-  };
+  const [isInitialIPLoaded, setIsInitialIPLoaded] = useState(false);
 
   useEffect(() => {
-    callIpify("", fillInfo);
-  }, [])
+    if (!isInitialIPLoaded) {
+      publicIpv4()
+        .then((userIP) => {
+          return callApi(userIP);
+        })
+        .then((info) => {
+          onSubmit(info ?? false);
+          setIsInitialIPLoaded(true);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [isInitialIPLoaded, onSubmit]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(inputText);
-    callIpify(inputText, fillInfo);
-    setInputText("");
+    callApi(inputText).then((info) => {
+      onSubmit(info ?? false);
+      setInputText("");
+    });
+
   };
-
-
 
   return (
     <form onSubmit={handleSubmit} className="search-form" autoComplete="off">
