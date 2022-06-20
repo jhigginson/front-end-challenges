@@ -1,17 +1,16 @@
 import styles from "../styles/TodoList.module.css";
-import { useState } from 'react';
+import { useTodoList } from "../context/TodoListProvider";
 
 export default function TodoItem(props) {
 
-  const [isDeleting, setIsDeleting] = useState(false);
+  const todoListCtx = useTodoList();
 
   const handleDrop = (event, droppedId) => {
     event.preventDefault();
     const draggedId = event.dataTransfer.getData("DraggedID");
-    const matches = draggedId.match(/(\d+)/);
-    if(matches){
-      let itemDraggedId = parseInt(matches[0]);
-      props.onDragAndDrop(itemDraggedId, droppedId);
+    if (draggedId) {
+      let itemDraggedId = parseInt(draggedId);
+      todoListCtx.reorderTodos(itemDraggedId, droppedId);
     }
   };
 
@@ -20,41 +19,45 @@ export default function TodoItem(props) {
   };
 
   const handleDragStart = (event) => {
-    event.dataTransfer.setData("DraggedID", event.target.id);
+    event.dataTransfer.setData("DraggedID", props.item.id);
   };
 
-  const beginDeleteAnim = () => {
-    setIsDeleting(true);
-  }
-
   const handleAnimEnd = (event) => {
-    console.log(event);
-    if(event.animationName.includes("getsmaller")){
-      props.onDelete();
+    console.log(event.animationName);
+
+    if (event.animationName.includes("getsmaller")) {
+      if (props.item.deleteMe) {
+        // console.log(props.item.id + " should get deleted now.");
+        props.onDelete();
+      }
+
+    }
+    if (event.animationName.includes("getbigger")) {
+      props.onCreated();
     }
 
   }
 
   return (
     <li id={`todo-item-${props.item.id}`}
-      className={`${styles["todo-list-item"]}${isDeleting ? ' ' + styles['delete-anim'] : ""}`}
+      className={`${styles["todo-list-item"]}${props.item.isHiding ? ' ' + styles['delete-anim'] : ""}${props.item.isGrowing ? ' ' + styles['create-anim'] : ""}`}
       draggable="true"
       onDrop={(e) => handleDrop(e, props.item.id)}
       onDragOver={handleDragOver}
       onDragStart={handleDragStart}
-      onAnimationEnd={handleAnimEnd}>
+    >
       <input type="checkbox"
         className={styles.checkbox}
         id={`checkbox${props.item.id}`}
         checked={props.item.completed}
-        onChange={props.onToggleCheck} 
-         />
+        onChange={() => todoListCtx.toggleChecked(props.item)}
+      />
 
       <label htmlFor={`checkbox${props.item.id}`}>{props.item.text}</label>
 
       <img className={styles.delete}
         src="/images/icon-cross.svg"
-        onClick={beginDeleteAnim} draggable="false" />
+        onClick={() => todoListCtx.deleteTodo(props.item)} draggable="false" />
 
     </li>);
 }

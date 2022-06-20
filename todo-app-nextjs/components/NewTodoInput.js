@@ -1,13 +1,16 @@
 import styles from "../styles/NewTodoInput.module.css";
 import { useState } from "react";
+import { useTodoList } from "../context/TodoListProvider";
 
 export default function NewTodoInput(props) {
   const [newTodoItem, setNewTodoItem] = useState('');
+  const todoListCtx = useTodoList();
 
   const handleNewTodo = (event) => {
     event.preventDefault(); //prevent page refresh
+    setNewTodoItem(prev => prev.trim());
     if (newTodoItem.trim() !== "") {
-      props.onSubmit(newTodoItem.trim());
+      todoListCtx.addTodo(newTodoItem.trim());
       setNewTodoItem("");
     }
 
