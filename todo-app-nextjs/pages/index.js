@@ -36,9 +36,9 @@ export default function Home() {
       </main>
 
       <footer className={styles.attribution}>
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge"
+        Challenge by <a href="https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW"
         >Frontend Mentor</a
-        >. Coded by <a href="#">John Higginson</a>
+        >. Coded by <a href="https://github.com/jhigginson/front-end-challenges/tree/main/todo-app-nextjs">John Higginson</a>
       </footer>
 
     </div>
