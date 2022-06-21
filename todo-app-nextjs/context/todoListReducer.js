@@ -8,31 +8,31 @@ const todoListReducer = (state, action) => {
 
   switch (type) {
     case "INIT_TODOS":
-      console.log("INIT_TODOS", payload);
+      // console.log("INIT_TODOS", payload);
 
       return{ ...state, todos: payload.todos};
     case "NEW_TODO":
-      console.log("NEW_TODO", payload);
+      // console.log("NEW_TODO", payload);
 
       return { ...state, todos: payload.todos };
     case "TOGGLE_CHECKED":
-      console.log("TOGGLE_CHECKED", payload);
+      // console.log("TOGGLE_CHECKED", payload);
       
       return { ...state, todos: payload.todos };
     case "DELETE":
-      console.log("DELETE", payload);
+      // console.log("DELETE", payload);
 
       return { ...state, todos: payload.todos };
     case "CLEAR":
-      console.log("CLEAR", payload);
+      // console.log("CLEAR", payload);
 
       return { ...state, todos: payload.todos };
     case "FILTER":
-      console.log("FILTER", payload);
+      // console.log("FILTER", payload);
 
       return { todos: payload.todos, filterBy: payload.filterBy };
     case "REORDER":
-      console.log("REORDER", payload);
+      // console.log("REORDER", payload);
 
       return { todos: payload.todos };
     default:

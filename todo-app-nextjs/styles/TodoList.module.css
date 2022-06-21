@@ -17,7 +17,7 @@
 }
 
 
-
+.todo-list footer,
 .todo-list-item {
   display: flex;
   justify-content: space-between;
@@ -28,25 +28,31 @@
   padding: 0 1rem;
 }
 
+.before-create{
+  height: 0;
+  transform: scaleY(0);
+}
+
 .create-anim{
-  animation: getbigger 500ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation: getbigger 300ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
 
 .delete-anim{
-  animation: getsmaller 500ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation: getbigger 300ms reverse cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
 
 .todo-list-item:first-of-type {
   border-radius: 5px 5px 0 0;
 }
 
-.todo-list-item:last-of-type {
+.todo-list footer {
   border-bottom: none;
   border-radius: 0 0 5px 5px;
   color: var(--info-bar-text);
+  width: 100%;
 }
 
-.todo-list-item:last-of-type,
+.todo-list footer,
 .filter-buttons {
   letter-spacing: -0.5px;
 }
@@ -142,16 +148,16 @@
     padding: 0 1.5rem;
   }
 
-  .todo-list-item:last-of-type {
+  .todo-list footer {
     font-size: 75%;
     height: 3rem;
   }
 
-  .todo-list-item:last-of-type > div,
-  .todo-list-item:last-of-type > a{
+  .todo-list footer > div,
+  .todo-list footer > a{
     min-width: 29%;
   }
-  .todo-list-item:last-of-type > a{
+  .todo-list footer > a{
     text-align: right;
   }
 
@@ -207,16 +213,5 @@
   100%{
     height: var(--item-height);
     transform: scaleY(1);
-  }
-}
-
-@keyframes getsmaller{
-  from{
-    height: var(--item-height);
-    transform: scaleY(1);
-  }
-  to{
-    height: 0;
-    transform: scaleY(0);
   }
 }

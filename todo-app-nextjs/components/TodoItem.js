@@ -22,22 +22,6 @@ export default function TodoItem(props) {
     event.dataTransfer.setData("DraggedID", props.item.id);
   };
 
-  const handleAnimEnd = (event) => {
-    console.log(event.animationName);
-
-    if (event.animationName.includes("getsmaller")) {
-      if (props.item.deleteMe) {
-        // console.log(props.item.id + " should get deleted now.");
-        props.onDelete();
-      }
-
-    }
-    if (event.animationName.includes("getbigger")) {
-      props.onCreated();
-    }
-
-  }
-
   return (
     <li id={`todo-item-${props.item.id}`}
       className={`${styles["todo-list-item"]}${props.item.isHiding ? ' ' + styles['delete-anim'] : ""}${props.item.isGrowing ? ' ' + styles['create-anim'] : ""}`}
