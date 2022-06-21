@@ -10,7 +10,7 @@ const todoListReducer = (state, action) => {
     case "INIT_TODOS":
       // console.log("INIT_TODOS", payload);
 
-      return{ ...state, todos: payload.todos};
+      return{ todos: payload.todos, filterBy: payload.filterBy};
     case "NEW_TODO":
       // console.log("NEW_TODO", payload);
 

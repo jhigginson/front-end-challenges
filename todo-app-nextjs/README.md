@@ -34,7 +34,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://www.frontendmentor.io/solutions/nextjs-react-with-responsive-design-dark-mode-and-drag-and-drop-AgJt8L6r_j](https://www.frontendmentor.io/solutions/nextjs-react-with-responsive-design-dark-mode-and-drag-and-drop-AgJt8L6r_j)
-- Live Site URL: [https://frontend-mentor-todo-rho.vercel.com](https://frontend-mentor-todo-rho.vercel.app)
+- Live Site URL: [https://frontend-mentor-todo-rho.vercel.app](https://frontend-mentor-todo-rho.vercel.app)
 
 ## My process
 
@@ -47,3 +47,16 @@ Users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [React-Transition-Group](https://reactcommunity.org/react-transition-group/) - Animation Library
+
+### What I learned
+
+- practice writing CSS and finely matching details to a design image
+- practice implementing responsive design
+- CSS Animations with and without React-transition-group
+- practice with Next.js
+- practice working with React features like hooks and context
+
+## Author
+
+- Frontend Mentor - [@jhigginson](https://www.frontendmentor.io/profile/jhigginson)
+- [LinkedIn](https://www.linkedin.com/in/johnmhigginson/)

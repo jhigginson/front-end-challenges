@@ -5,12 +5,17 @@ import mockTodo from '../mock-todo';
 const TodoListContext = createContext(initialState);
 
 
-const getInitialTodos = () => {
+const getInitialState = () => {
   let updatedTodoList = mockTodo();
   if (typeof window !== 'undefined' && window.localStorage["todoList"]) {
     updatedTodoList = JSON.parse(window.localStorage["todoList"]);
   }
-  return updatedTodoList;
+  let updatedFilter = "All";
+  if (typeof window !== 'undefined' && window.localStorage["todoFilter"]) {
+    updatedFilter = window.localStorage["todoFilter"];
+  }
+
+  return [updatedTodoList, updatedFilter];
 }
 
 
@@ -19,13 +24,14 @@ const TodoListProvider = ({ children }) => {
   const [isWindowLoaded, setIsWindowLoaded] = useState(false);
 
   useEffect(() => {
-    const updatedTodos = getInitialTodos();
+    const [updatedTodos, updatedFltr] = getInitialState();
     if (!isWindowLoaded) {
       setIsWindowLoaded(true);
       dispatch({
         type: "INIT_TODOS",
         payload: {
-          todos: updatedTodos
+          todos: updatedTodos,
+          filterBy: updatedFltr
         }
       });
     }
@@ -34,8 +40,9 @@ const TodoListProvider = ({ children }) => {
   useEffect(() => {
     if (typeof window !== 'undefined' && isWindowLoaded) {
       window.localStorage.setItem('todoList', JSON.stringify(state.todos));
+      window.localStorage.setItem('todoFilter', state.filterBy)
     }
-  }, [state.todos]);
+  }, [state.todos, state.filterBy]);
 
   const addTodo = (todoText) => {
     const maxId = Math.max(...state.todos.map(i => i.id));
@@ -119,7 +126,7 @@ const TodoListProvider = ({ children }) => {
     const droppedIdx = state.todos.indexOf(droppedOnItem);
     const draggedIdx = state.todos.indexOf(draggedItem);
     updatedTodos.splice(draggedIdx, 1); //delete dragged Item
-    
+
     const newDroppedIdx = updatedTodos.indexOf(droppedOnItem);
     if (draggedIdx < droppedIdx) {
       updatedTodos.splice(newDroppedIdx + 1, 0, draggedItem);
