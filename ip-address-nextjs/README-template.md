@@ -56,6 +56,6 @@ Users should be able to:
 
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/jhigginson)
+- Frontend Mentor - [@jhigginson](https://www.frontendmentor.io/profile/jhigginson)
 - [LinkedIn](https://www.linkedin.com/in/johnmhigginson/)
 
