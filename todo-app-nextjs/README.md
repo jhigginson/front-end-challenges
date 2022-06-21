@@ -25,7 +25,7 @@ Users should be able to:
 - Filter by all/active/complete todos
 - Clear all completed todos
 - Toggle light and dark mode
-- Drag and drop to reorder items on the list (currently only works on desktop not mobile)
+- Drag and drop to reorder items on the list (desktop browsers only)
 
 ### Screenshot
 
@@ -41,8 +41,9 @@ Users should be able to:
 ### Built with
 
 - Semantic HTML5 markup
-- CSS custom properties
+- CSS Animations
 - Flexbox
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
+- [React-Transition-Group](https://reactcommunity.org/react-transition-group/) - Animation Library
