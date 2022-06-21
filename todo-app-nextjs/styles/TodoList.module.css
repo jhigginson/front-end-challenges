@@ -6,6 +6,8 @@
 }
 
 .todo-list {
+  --item-height: 3rem;
+  background-color: var(--box-bg);
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -14,27 +16,43 @@
   box-shadow: 0 8px 30px 8px rgba(0, 0, 0, 0.1);
 }
 
+
+.todo-list footer,
 .todo-list-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--box-bg);
   border-bottom: 1px solid var(--border-color);
-  height: 3rem;
+  height: var(--item-height);
   padding: 0 1rem;
+}
+
+.before-create{
+  height: 0;
+  transform: scaleY(0);
+}
+
+.create-anim{
+  animation: getbigger 300ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.delete-anim{
+  animation: getbigger 300ms reverse cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
 
 .todo-list-item:first-of-type {
   border-radius: 5px 5px 0 0;
 }
 
-.todo-list-item:last-of-type {
+.todo-list footer {
   border-bottom: none;
   border-radius: 0 0 5px 5px;
   color: var(--info-bar-text);
+  width: 100%;
 }
 
-.todo-list-item:last-of-type,
+.todo-list footer,
 .filter-buttons {
   letter-spacing: -0.5px;
 }
@@ -51,6 +69,7 @@
   margin: 0;
   padding: 0;
   flex-shrink: 0;
+  transition: border, background 300ms ease-out;
 }
 
 .checkbox:hover,
@@ -76,6 +95,7 @@
   padding-top: 1.1rem;
   padding-left: 1.2rem;
   height: 100%;
+  transition: color 300ms ease-out;
 }
 
 .checkbox:checked + label {
@@ -121,23 +141,23 @@
     margin-top: 1.4rem;
     padding: 0;
     box-shadow: 0 1rem 30px 8px rgba(0, 0, 0, 0.2);
+    --item-height: 4rem;
   }
 
   .todo-list-item {
-    height: 4rem;
     padding: 0 1.5rem;
   }
 
-  .todo-list-item:last-of-type {
+  .todo-list footer {
     font-size: 75%;
     height: 3rem;
   }
 
-  .todo-list-item:last-of-type > div,
-  .todo-list-item:last-of-type > a{
+  .todo-list footer > div,
+  .todo-list footer > a{
     min-width: 29%;
   }
-  .todo-list-item:last-of-type > a{
+  .todo-list footer > a{
     text-align: right;
   }
 
@@ -181,5 +201,17 @@
 @media (hover: hover) and (pointer: fine) {
   .reorder-instructions {
     display: block;
+  }
+}
+
+
+@keyframes getbigger{
+  0%{
+    height: 0;
+    transform: scaleY(0);
+  }
+  100%{
+    height: var(--item-height);
+    transform: scaleY(1);
   }
 }

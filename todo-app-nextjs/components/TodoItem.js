@@ -1,14 +1,16 @@
 import styles from "../styles/TodoList.module.css";
+import { useTodoList } from "../context/TodoListProvider";
 
 export default function TodoItem(props) {
+
+  const todoListCtx = useTodoList();
 
   const handleDrop = (event, droppedId) => {
     event.preventDefault();
     const draggedId = event.dataTransfer.getData("DraggedID");
-    const matches = draggedId.match(/(\d+)/);
-    if(matches){
-      let itemDraggedId = parseInt(matches[0]);
-      props.onDragAndDrop(itemDraggedId, droppedId);
+    if (draggedId) {
+      let itemDraggedId = parseInt(draggedId);
+      todoListCtx.reorderTodos(itemDraggedId, droppedId);
     }
   };
 
@@ -17,7 +19,7 @@ export default function TodoItem(props) {
   };
 
   const handleDragStart = (event) => {
-    event.dataTransfer.setData("DraggedID", event.target.id);
+    event.dataTransfer.setData("DraggedID", props.item.id);
   };
 
   return (
@@ -26,19 +28,20 @@ export default function TodoItem(props) {
       draggable="true"
       onDrop={(e) => handleDrop(e, props.item.id)}
       onDragOver={handleDragOver}
-      onDragStart={handleDragStart}>
-
+      onDragStart={handleDragStart}
+    >
       <input type="checkbox"
         className={styles.checkbox}
         id={`checkbox${props.item.id}`}
         checked={props.item.completed}
-        onChange={props.onToggleCheck} />
+        onChange={() => todoListCtx.toggleChecked(props.item)}
+      />
 
       <label htmlFor={`checkbox${props.item.id}`}>{props.item.text}</label>
 
       <img className={styles.delete}
         src="/images/icon-cross.svg"
-        onClick={props.onDelete} draggable="false" />
+        onClick={() => todoListCtx.deleteTodo(props.item)} draggable="false" />
 
     </li>);
 }
