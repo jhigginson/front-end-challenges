@@ -44,9 +44,6 @@ const TodoListProvider = ({ children }) => {
       id: maxId < 0 ? 0 : maxId + 1,
       text: todoText,
       completed: false,
-      deleteMe: false,
-      isHiding: false,
-      isGrowing: false,
       isVisible: true
     };
     const updatedTodos = state.todos.concat(todo);

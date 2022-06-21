@@ -24,7 +24,7 @@ export default function TodoItem(props) {
 
   return (
     <li id={`todo-item-${props.item.id}`}
-      className={`${styles["todo-list-item"]}${props.item.isHiding ? ' ' + styles['delete-anim'] : ""}${props.item.isGrowing ? ' ' + styles['create-anim'] : ""}`}
+      className={styles["todo-list-item"]}
       draggable="true"
       onDrop={(e) => handleDrop(e, props.item.id)}
       onDragOver={handleDragOver}
