@@ -1,5 +1,4 @@
-
-import './IpInfo.css';
+import React from "react";
 
 const IpInfo = ({ info }) => {
   return (

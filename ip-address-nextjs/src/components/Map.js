@@ -1,7 +1,6 @@
 import L from 'leaflet';
 import { useState, useEffect, useMemo } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
-import './Map.css';
 
 var customIcon = L.icon({
   iconUrl: '/images/icon-location.svg',
