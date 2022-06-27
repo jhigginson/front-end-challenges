@@ -1,0 +1,85 @@
+const themeOne = {
+  "--main-text": "white",
+  "--main-bg": "hsl(222, 26%, 31%)",
+  "--toggle-key": "hsl(6, 63%, 50%)",
+  "--toggle-bg": "hsl(223, 31%, 20%)",
+  "--toggle-h": "rgba(249,108,99,255)",
+  "--keypad-bg": "hsl(223, 31%, 20%)",
+  "--screen-bg": "hsl(224, 36%, 15%)",
+  "--func-key-b": "hsl(225, 21%, 49%)",
+  "--func-key-sh": "hsl(224, 28%, 35%)",
+  "--func-key-t": "white",
+  "--func-key-h": "rgba(162,179,225,255)",
+  "--eq-key-b": "hsl(6, 63%, 50%)",
+  "--eq-key-sh": "hsl(6, 70%, 34%)",
+  "--eq-key-t": "white",
+  "--eq-key-h": "rgba(249,108,99,255)",
+  "--num-key-b": "hsl(30, 25%, 89%)",
+  "--num-key-sh": "hsl(28, 16%, 65%)",
+  "--num-key-t": "hsl(221, 14%, 31%)",
+  "--num-key-h": "white"
+};
+export { themeOne };
+
+
+const themeTwo = {
+  "--main-text": "hsl(60, 10%, 19%)",
+  "--main-bg": "hsl(0, 0%, 90%)",
+  "--toggle-key": "hsl(25, 98%, 40%)",
+  "--toggle-bg": "hsl(0, 5%, 81%)",
+  "--toggle-h": "rgba(255,139,56,255)",
+  "--keypad-bg": "hsl(0, 5%, 81%)",
+  "--screen-bg": "hsl(0, 0%, 93%)",
+  "--func-key-b": "hsl(185, 42%, 37%)",
+  "--func-key-sh": "hsl(185, 58%, 25%)",
+  "--func-key-t": "white",
+  "--func-key-h": "rgba(98,181,189,255)",
+  "--eq-key-b": "hsl(25, 98%, 40%)",
+  "--eq-key-sh": "hsl(25, 99%, 27%)",
+  "--eq-key-t": "white",
+  "--eq-key-h": "rgba(255,139,56,255)",
+  "--num-key-b": "hsl(45, 7%, 89%)",
+  "--num-key-sh": "hsl(35, 11%, 61%)",
+  "--num-key-t": "hsl(60, 10%, 19%)",
+  "--num-key-h": "white"
+};
+export { themeTwo };
+
+const themeThree = {
+  "--main-text": "hsl(52, 100%, 62%)",
+  "--main-bg": "hsl(268, 75%, 9%)",
+  "--toggle-key": "hsl(176, 100%, 44%)",
+  "--toggle-bg": "hsl(268, 71%, 12%)",
+  "--toggle-h": "rgba(148,255,249,255)",
+  "--keypad-bg": "hsl(268, 71%, 12%)",
+  "--screen-bg": "hsl(268, 71%, 12%)",
+  "--func-key-b": "hsl(281, 89%, 26%)",
+  "--func-key-sh": "hsl(285, 91%, 52%)",
+  "--func-key-t": "white",
+  "--func-key-h": "rgba(134,49,176,255)",
+  "--eq-key-b": "hsl(176, 100%, 44%)",
+  "--eq-key-sh": "hsl(177, 92%, 70%)",
+  "--eq-key-t": "hsl(198, 20%, 13%)",
+  "--eq-key-h": "rgba(148,255,249,255)",
+  "--num-key-b": "hsl(268, 47%, 21%)",
+  "--num-key-sh": "hsl(290, 70%, 36%)",
+  "--num-key-t": "hsl(52, 100%, 62%)",
+  "--num-key-h": "rgba(107,52,172,255)"
+};
+export { themeThree };
+
+//  'main-bg': 'var(--main-bg)',
+//  'toggle-bg': 'var(--toggle-bg)',
+//  'keypad-bg': 'var(--keypad-bg)',
+//  'screen-bg': 'var(--screen-bg)',
+//  'toggle-key': 'var(--toggle-key)',
+//  'func-key-b': 'var(--func-key-b)',
+//  'func-key-sh': 'var(--func-key-sh)',
+//  'func-key-t': 'var(--func-key-t)',
+//  'eq-key-b': 'var(--eq-key-sh)',
+//  'eq-key-sh': 'var(--eq-key-sh)',
+//  'eq-key-t': 'var(--eq-key-t)',
+//  'num-key-b': 'var(--num-key-sh)',
+//  'num-key-sh': 'var(--num-key-sh)',
+//  'num-key-t': 'var(--num-key-t)',
+//  'main-text': '#ffffff',
