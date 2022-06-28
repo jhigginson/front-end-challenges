@@ -130,26 +130,26 @@ const Calculator = (props) => {
   const [state, dispatch] = useReducer(calcReducer, initialState);
 
   return (
-    <main className="h-full flex flex-col gap-6">
+    <main className="h-full flex flex-col gap-6 md:mb-12">
       <p id="screen"
-        className="flex-none bg-screen-b rounded-xl h-[88px] w-full text-4xl text-right pr-6 pt-[26px]">
+        className="flex-none bg-screen-b rounded-xl h-[88px] md:h-[124px] w-full text-4xl md:text-6xl text-right pr-7 pt-[26px] md:pt-[38px]">
         {state.screen}
       </p>
 
       <section id="keypad"
-        className="bg-keypad-b rounded-xl h-full w-full grid grid-cols-4 grid-rows-5 gap-y-4 gap-x-3 p-6"
+        className="bg-keypad-b rounded-xl h-full w-full grid grid-cols-4 grid-rows-5 gap-y-4 gap-x-3 md:gap-y-7 md:gap-x-6 p-7"
       >
         {['7', '8', '9', 'Del', '4', '5', '6', '+', '1', '2', '3', '-', '.', '0', '/', 'x', 'Reset', '='].map((keyName, index) => {
           const keyType = getKeyType(keyName);
           const isDouble = ['Reset', '='].includes(keyName);
-          const textSize = keyType === 'func' ? 'text-lg' : 'text-[32px]';
+          const textSize = keyType === 'func' ? 'text-md' : 'text-[32px]';
           return (
             <div key={index} id={`key${keyName}`}
               onClick={() =>
                 dispatch({ type: keyName })
               }
-              className={`cursor-pointer flex items-center justify-center rounded-lg bg-${keyType}-key-b text-${keyType}-key-t ${textSize} ${isDouble && 'col-span-2'} shadow-keys shadow-${keyType}-key-sh hover:bg-${keyType}-key-h`}>
-              <p className={`pt-2 leading-none ${keyType === 'func' && 'uppercase'} select-none`}>{keyName}</p>
+              className={`cursor-pointer flex items-center justify-center rounded-md md:rounded-xl bg-${keyType}-key-b text-${keyType}-key-t ${textSize} ${isDouble && 'col-span-2'} shadow-keys shadow-${keyType}-key-sh hover:bg-${keyType}-key-h`}>
+              <p className={`md:text-5xl pt-2 leading-none ${keyType === 'func' && 'uppercase md:text-[32px]'} select-none`}>{keyName}</p>
             </div>
           );
         })}

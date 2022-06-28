@@ -3,6 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  background-color: var(--main-bg);
+
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body{
+    background-color: var(--main-bg);
+  }
 }
