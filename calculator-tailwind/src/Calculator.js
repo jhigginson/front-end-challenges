@@ -40,7 +40,7 @@ const initialState = {
 function evaluate(operation, first, second) {
 
   switch (operation) {
-    case '' :
+    case '':
       return second;
     case '+':
       return first + second;
@@ -70,7 +70,7 @@ function calcReducer(state, action) {
         console.log(newState);
         return newState;
       }
-      newState = { ...state, screen: state.screen + action.type, clearOnNext: false};
+      newState = { ...state, screen: state.screen + action.type, clearOnNext: false };
       console.log(newState);
       return newState;
     case '0':
@@ -84,10 +84,10 @@ function calcReducer(state, action) {
     case '8':
     case '9':
       let newScreen = state.screen;
-      if(state.screen.length <= MAX_PRECISION){
-        if(state.clearOnNext){
+      if (state.screen.length <= MAX_PRECISION) {
+        if (state.clearOnNext) {
           newScreen = action.type;
-        }else{
+        } else {
           newScreen = state.screen + action.type;
         }
       }
@@ -104,7 +104,7 @@ function calcReducer(state, action) {
       console.log(newState);
       return newState;
     case '=':
-      if (state.screen.length === 0) return { ...state };
+      if (state.screen.length === 0 || state.clearOnNext) { return { ...state }; };
       const newTotal = evaluate(state.operation, state.total, strToNum(state.screen));
       newState = { screen: numToScreenStr(newTotal), operation: '', total: null, clearOnNext: true };
       console.log(newState);

@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="text-main-t mx-auto w-[88%] h-full flex flex-col">
       <header className="flex-none basis-[101px] flex items-center justify-between">
-        <h1 className="text-3xl pl-2">calc</h1>
+        <h1 className="text-3xl pl-2 select-none">calc</h1>
         <ThemeToggle onThemeChange={handleThemeChange} theme={theme} />
         
       </header>

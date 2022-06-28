@@ -13,12 +13,12 @@ const ThemeToggle = (props) => {
 
   return (
     <form className="grid grid-cols-[1fr_72px] grid-rows-2 w-1/2 text-sm text-center">
-      <div className="col-start-2 grid grid-cols-3 items-center cursor-pointer">
-        <label htmlFor="theme1">1</label>
-        <label htmlFor="theme2">2</label>
-        <label htmlFor="theme3">3</label>
+      <div className="col-start-2 grid grid-cols-3 items-center select-none">
+        <label className="cursor-pointer" htmlFor="theme1">1</label>
+        <label className="cursor-pointer" htmlFor="theme2">2</label>
+        <label className="cursor-pointer" htmlFor="theme3">3</label>
       </div>
-      <h2 className="pr-5 uppercase self-center justify-self-end">Theme</h2>
+      <h2 className="pr-5 uppercase self-center justify-self-end select-none">Theme</h2>
       <div className="bg-toggle-b grid grid-cols-3 items-center rounded-full h-[26px] relative cursor-pointer group">
         {[1, 2, 3].map((themeNum) => (
           <input key={themeNum}
