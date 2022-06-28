@@ -1,3 +1,4 @@
+import { useReducer } from 'react';
 
 function getKeyType(key) {
   if (["Del", "Reset"].includes(key)) {
@@ -9,14 +10,130 @@ function getKeyType(key) {
   }
 }
 
+function strToNum(str) {
+  const num = parseFloat(str);
+  if (isNaN(num)) {
+    throw new Error("screen value is NaN");
+  }
+  return num;
+}
+
+const MAX_PRECISION = 13;
+
+function numToScreenStr(num) {
+  if (num == null) { return ""; }
+  const str = num.toString();
+  if (str.length > MAX_PRECISION + 1) {
+    return num.toPrecision(MAX_PRECISION);
+  }
+  str.replace()
+  return str;
+}
+
+const initialState = {
+  screen: "",
+  operation: "",
+  total: null,
+  clearOnNext: true,
+};
+
+function evaluate(operation, first, second) {
+
+  switch (operation) {
+    case '' :
+      return second;
+    case '+':
+      return first + second;
+    case '-':
+      return first - second;
+    case '/':
+      return first / second;
+    case 'x':
+      return first * second;
+    default:
+      throw new Error("unexpected operation");
+  }
+}
+
+function calcReducer(state, action) {
+  console.log(action.type);
+  let newState = {};
+  switch (action.type) {
+    case '.':
+      if (state.screen.includes('.') && !state.clearOnNext) {
+        newState = { ...state, clearOnNext: false };
+        console.log(newState);
+        return newState;
+      }
+      if (state.screen.length === 0 || state.clearOnNext) {
+        newState = { ...state, screen: '0.', clearOnNext: false };
+        console.log(newState);
+        return newState;
+      }
+      newState = { ...state, screen: state.screen + action.type, clearOnNext: false};
+      console.log(newState);
+      return newState;
+    case '0':
+    case '1':
+    case '2':
+    case '3':
+    case '4':
+    case '5':
+    case '6':
+    case '7':
+    case '8':
+    case '9':
+      let newScreen = state.screen;
+      if(state.screen.length <= MAX_PRECISION){
+        if(state.clearOnNext){
+          newScreen = action.type;
+        }else{
+          newScreen = state.screen + action.type;
+        }
+      }
+      newState = { ...state, screen: newScreen, clearOnNext: false };
+      console.log(newState);
+      return newState;
+    case '+':
+    case '-':
+    case '/':
+    case 'x':
+      if (state.screen.length === 0) return { ...state };
+      const newTot = state.total == null ? strToNum(state.screen) : evaluate(state.operation, state.total, strToNum(state.screen));
+      newState = { screen: numToScreenStr(newTot), operation: action.type, total: newTot, clearOnNext: true };
+      console.log(newState);
+      return newState;
+    case '=':
+      if (state.screen.length === 0) return { ...state };
+      const newTotal = evaluate(state.operation, state.total, strToNum(state.screen));
+      newState = { screen: numToScreenStr(newTotal), operation: '', total: null, clearOnNext: true };
+      console.log(newState);
+      return newState;
+    case 'Reset':
+      newState = initialState;
+      console.log(newState);
+      return newState;
+    case 'Del':
+      newState = { ...state, screen: state.screen.length > 0 && !state.clearOnNext ? state.screen.slice(0, -1) : state.screen };
+      console.log(newState);
+      return newState;
+    default:
+      throw new Error("Unsupported action type in calcReducer");
+  }
+}
+
+
+
+
 const Calculator = (props) => {
 
+  const [state, dispatch] = useReducer(calcReducer, initialState);
 
   return (
     <main className="h-full flex flex-col gap-6">
       <p id="screen"
         className="flex-none bg-screen-b rounded-xl h-[88px] w-full text-4xl text-right pr-6 pt-[26px]">
-        399,981
+        {state.screen}
       </p>
 
       <section id="keypad"
@@ -25,13 +142,17 @@ const Calculator = (props) => {
         {['7', '8', '9', 'Del', '4', '5', '6', '+', '1', '2', '3', '-', '.', '0', '/', 'x', 'Reset', '='].map((keyName, index) => {
           const keyType = getKeyType(keyName);
           const isDouble = ['Reset', '='].includes(keyName);
-          const textSize = keyType === 'func' ? 'text-lg' : 'text-[32px]'
+          const textSize = keyType === 'func' ? 'text-lg' : 'text-[32px]';
           return (
-          <div key={index} id={`key${keyName}`}
-            className={`cursor-pointer flex items-center justify-center rounded-lg bg-${keyType}-key-b text-${keyType}-key-t ${textSize} ${isDouble && 'col-span-2'} shadow-keys shadow-${keyType}-key-sh hover:bg-${keyType}-key-h`}>
-            <p className={`pt-2 leading-none ${keyType === 'func' && 'uppercase'}`}>{keyName}</p>
-          </div>
-        );})} 
+            <div key={index} id={`key${keyName}`}
+              onClick={() =>
+                dispatch({ type: keyName })
+              }
+              className={`cursor-pointer flex items-center justify-center rounded-lg bg-${keyType}-key-b text-${keyType}-key-t ${textSize} ${isDouble && 'col-span-2'} shadow-keys shadow-${keyType}-key-sh hover:bg-${keyType}-key-h`}>
+              <p className={`pt-2 leading-none ${keyType === 'func' && 'uppercase'} select-none`}>{keyName}</p>
+            </div>
+          );
+        })}
       </section>
     </main>
   );
