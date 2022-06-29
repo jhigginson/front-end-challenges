@@ -10,7 +10,7 @@ const isIP = (input) => {
 }
 
 const callApi = async (input, doAfter) => {
-  console.log("local api called");
+  // console.log("local api called");
   const api_url = '/api/ipinfo?';
   let requestField = "";
   if (isIP(input)) {
@@ -26,7 +26,7 @@ const callApi = async (input, doAfter) => {
   }
 
   const url = `${api_url}${requestField}${input}`;
-  console.log(url);
+  // console.log(url);
   try {
     const res = await fetch(url);
     const data = await res.json();
