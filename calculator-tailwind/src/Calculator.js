@@ -11,7 +11,7 @@ function getKeyType(key) {
 }
 
 function strToNum(str) {
-  const num = parseFloat(str);
+  const num = parseFloat(str.replaceAll(',', ''));
   if (isNaN(num)) {
     throw new Error("screen value is NaN");
   }
@@ -83,15 +83,13 @@ function calcReducer(state, action) {
     case '8':
     case '9':
       let newScreen = state.screen;
-      if (state.screen.length <= MAX_PRECISION) {
-        if (state.clearOnNext) {
-          newScreen = action.type;
-        } else {
-            newScreen = state.screen + action.type;
-        }
+      if (state.clearOnNext) {
+        newScreen = action.type;
+      } else if (state.screen.length <= MAX_PRECISION){
+          newScreen = state.screen + action.type;
       }
       newState = { ...state, screen: newScreen, clearOnNext: false };
-      // console.log(newState);
+      console.log(newState);
       return newState;
     case '+':
     case '-':
@@ -100,13 +98,13 @@ function calcReducer(state, action) {
       if (state.screen.length === 0) return { ...state };
       const newTot = state.total == null ? strToNum(state.screen) : evaluate(state.operation, state.total, strToNum(state.screen));
       newState = { screen: numToScreenStr(newTot), operation: action.type, total: newTot, clearOnNext: true };
-      // console.log(newState);
+      console.log(newState);
       return newState;
     case '=':
       if (state.screen.length === 0 || state.clearOnNext) { return { ...state }; };
       const newTotal = evaluate(state.operation, state.total, strToNum(state.screen));
       newState = { screen: numToScreenStr(newTotal), operation: '', total: null, clearOnNext: true };
-      // console.log(newState);
+      console.log(newState);
       return newState;
     case 'Reset':
       newState = initialState;
