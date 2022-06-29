@@ -6,7 +6,7 @@ const TodoListContext = createContext(initialState);
 
 
 const getInitialState = () => {
-  let updatedTodoList = mockTodo();
+  let updatedTodoList = [];
   if (typeof window !== 'undefined' && window.localStorage["todoList"]) {
     updatedTodoList = JSON.parse(window.localStorage["todoList"]);
   }
