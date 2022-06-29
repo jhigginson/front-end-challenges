@@ -41,8 +41,8 @@ export default function Home() {
         <IpInfo info={locationInfo} />
       </main>
       <footer className="attribution">
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-        Coded by <a href="#">John Higginson</a>.
+        Challenge by <a href="https://www.frontendmentor.io/challenges/ip-address-tracker-I8-0yYAH0">Frontend Mentor</a>.
+        Coded by <a href="https://github.com/jhigginson/front-end-challenges/tree/main/ip-address-nextjs">John Higginson</a>.
       </footer>
     </>
   );
