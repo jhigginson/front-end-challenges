@@ -27,7 +27,7 @@ function App() {
       <Calculator />
       <footer className="text-xs text-main-t mt-3 text-center">
         Challenge by <a href="https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29">Frontend Mentor</a>.
-        Coded by <a href="https://github.com/jhigginson/front-end-challenges/caclulator-tailwind">John Higginson</a>.
+        Coded by <a href="https://github.com/jhigginson/front-end-challenges/tree/main/calculator-tailwind">John Higginson</a>.
       </footer>
     </div>
   );
