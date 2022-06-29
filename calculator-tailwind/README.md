@@ -31,8 +31,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/calculator-developed-with-react-and-tailwind-css-31BamRxQPP](https://www.frontendmentor.io/solutions/calculator-developed-with-react-and-tailwind-css-31BamRxQPP)
+- Live Site URL: [https://calculator-tailwind-nwqkustof-whiplers.vercel.app/](https://calculator-tailwind-nwqkustof-whiplers.vercel.app/)
 
 ## My process
 
