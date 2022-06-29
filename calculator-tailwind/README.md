@@ -31,7 +31,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://www.frontendmentor.io/solutions/calculator-developed-with-react-and-tailwind-css-31BamRxQPP](https://www.frontendmentor.io/solutions/calculator-developed-with-react-and-tailwind-css-31BamRxQPP)
-- Live Site URL: [https://calculator-tailwind-nwqkustof-whiplers.vercel.app/](https://calculator-tailwind-nwqkustof-whiplers.vercel.app/)
+- Live Site URL: [https://calculator-tailwind.vercel.app/](https://calculator-tailwind.vercel.app/)
 
 ## My process
 

@@ -89,7 +89,7 @@ function calcReducer(state, action) {
           newScreen = state.screen + action.type;
       }
       newState = { ...state, screen: newScreen, clearOnNext: false };
-      console.log(newState);
+      // console.log(newState);
       return newState;
     case '+':
     case '-':
@@ -98,13 +98,13 @@ function calcReducer(state, action) {
       if (state.screen.length === 0) return { ...state };
       const newTot = state.total == null ? strToNum(state.screen) : evaluate(state.operation, state.total, strToNum(state.screen));
       newState = { screen: numToScreenStr(newTot), operation: action.type, total: newTot, clearOnNext: true };
-      console.log(newState);
+      // console.log(newState);
       return newState;
     case '=':
       if (state.screen.length === 0 || state.clearOnNext) { return { ...state }; };
       const newTotal = evaluate(state.operation, state.total, strToNum(state.screen));
       newState = { screen: numToScreenStr(newTotal), operation: '', total: null, clearOnNext: true };
-      console.log(newState);
+      // console.log(newState);
       return newState;
     case 'Reset':
       newState = initialState;
