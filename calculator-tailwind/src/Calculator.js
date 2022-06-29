@@ -18,16 +18,15 @@ function strToNum(str) {
   return num;
 }
 
-const MAX_PRECISION = 13;
+const MAX_PRECISION = 12;
 
 function numToScreenStr(num) {
   if (num == null) { return ""; }
   const str = num.toString();
   if (str.length > MAX_PRECISION + 1) {
-    return num.toPrecision(MAX_PRECISION);
+    return parseFloat(num.toPrecision(MAX_PRECISION)).toLocaleString('en-US');
   }
-  str.replace()
-  return str;
+  return num.toLocaleString('en-US');
 }
 
 const initialState = {
@@ -88,7 +87,7 @@ function calcReducer(state, action) {
         if (state.clearOnNext) {
           newScreen = action.type;
         } else {
-          newScreen = state.screen + action.type;
+            newScreen = state.screen + action.type;
         }
       }
       newState = { ...state, screen: newScreen, clearOnNext: false };
@@ -133,7 +132,7 @@ const Calculator = (props) => {
     <main className="h-full flex flex-col gap-6 md:mb-12">
       <p id="screen"
         className="flex-none bg-screen-b rounded-xl h-[88px] md:h-[124px] w-full text-4xl md:text-6xl text-right pr-7 pt-[26px] md:pt-[38px]">
-        {state.screen === "" ? state.screen : state.screen[state.screen.length - 1] === '.' ? parseFloat(state.screen.slice(0, state.screen.length - 1)).toLocaleString('en-US') + "." : parseFloat(state.screen).toLocaleString('en-US')}
+        {state.screen === "" ? state.screen : state.screen[state.screen.length - 1] === '.' ? parseFloat(state.screen.slice(0, state.screen.length - 1)).toLocaleString('en-US') + "." : state.screen}
       </p>
 
       <section id="keypad"

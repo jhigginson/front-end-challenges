@@ -1,26 +1,17 @@
 import { useEffect, useState } from "react";
-import { applyTheme } from "./themes/utils";
-import {themeOne, themeTwo, themeThree} from "./themes/themes";
+import { applyTheme, getInitialTheme } from "./themes/utils";
 import ThemeToggle from "./ThemeToggle";
 import Calculator from "./Calculator";
 
+
+
 function App() {
 
-  const [theme, setTheme] = useState("1");
+  const [theme, setTheme] = useState(getInitialTheme());
 
   useEffect(() => {
-    if(theme === "1"){
-      applyTheme(themeOne);
-    }else if(theme === "2"){
-      applyTheme(themeTwo);
-    }else if(theme === "3"){
-      applyTheme(themeThree);
-    }
-    
+    applyTheme(theme);
   }, [theme]);
-
-
-
 
   const handleThemeChange = (id) => { 
     setTheme(id);
@@ -28,7 +19,7 @@ function App() {
   };
 
   return (
-    <div className="text-main-t mx-auto w-[88%] md:w-2/5 h-full flex flex-col">
+    <div className="text-main-t mx-auto w-[88%] md:w-2/5 md:min-w-[36rem] h-full flex flex-col">
       <header className="flex-none basis-[101px] md:mt-16 flex items-center justify-between">
         <h1 className="text-3xl pl-2 select-none">calc</h1>
         <ThemeToggle onThemeChange={handleThemeChange} theme={theme} />
@@ -36,8 +27,8 @@ function App() {
       </header>
       <Calculator />
       <footer className="text-xs text-main-t mt-3 text-center">
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-        Coded by <a href="#">Your Name Here</a>.
+        Challenge by <a href="https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29">Frontend Mentor</a>.
+        Coded by <a href="https://github.com/jhigginson/">John Higginson</a>.
       </footer>
     </div>
   );
