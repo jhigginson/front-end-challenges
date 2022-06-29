@@ -30,7 +30,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [https://www.frontendmentor.io/challenges/ip-address-tracker-I8-0yYAH0/hub/ip-address-tracker-with-nextjs-api-xjnByCkOox](https://www.frontendmentor.io/challenges/ip-address-tracker-I8-0yYAH0/hub/ip-address-tracker-with-nextjs-api-xjnByCkOox)
 - Live Site URL: [https://front-end-challenges-six.vercel.app/](https://front-end-challenges-six.vercel.app/)
 
 ## My process
@@ -48,7 +48,7 @@ Users should be able to:
 
 ### What I learned
 
-- further practice writing CSS,
+- further practice writing CSS
 - practiced writing api calls to third party apis
 - how to integrate interactive maps
 - using third-party component libraries
