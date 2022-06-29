@@ -55,4 +55,4 @@ It was also a good way to practice the useReducer React hook to implement the lo
 ## Author
 
 - Frontend Mentor Profile - [@jhigginson](https://www.frontendmentor.io/profile/jhigginson)
-
+- [LinkedIn](https://www.linkedin.com/in/johnmhigginson/)
