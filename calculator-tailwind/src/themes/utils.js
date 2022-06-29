@@ -18,6 +18,6 @@ export function getInitialTheme() {
   } else if (typeof window !== 'undefined') {
     theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "1" : "2";
   }
-  console.log("Initial Theme: ", theme);
+  // console.log("Initial Theme: ", theme);
   return theme;
 }

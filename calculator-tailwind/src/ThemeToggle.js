@@ -2,7 +2,7 @@
 
 const ThemeToggle = (props) => {
 
-  console.log("checked = ", props.theme)
+  // console.log("checked = ", props.theme)
 
   let translateX = "";
   if(props.theme === '1'){
@@ -29,7 +29,7 @@ const ThemeToggle = (props) => {
             onChange={(e) => props.onThemeChange(e.target.value)}
             checked={themeNum === parseInt(props.theme)} />
         ))}
-        <span className={`absolute w-[18px] h-[18px] mx-auto left-0 right-0 rounded-full bg-toggle group-hover:bg-toggle-h transition-all duration-100 ${translateX}`}></span>
+        <span className={`absolute w-[18px] h-[18px] mx-auto left-0 right-0 rounded-full bg-toggle group-hover:bg-toggle-h transition-all duration-200 ${translateX}`}></span>
       </div>
     </form>
   );

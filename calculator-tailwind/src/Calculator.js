@@ -55,22 +55,22 @@ function evaluate(operation, first, second) {
 }
 
 function calcReducer(state, action) {
-  console.log(action.type);
+  // console.log(action.type);
   let newState = {};
   switch (action.type) {
     case '.':
       if (state.screen.includes('.') && !state.clearOnNext) {
         newState = { ...state, clearOnNext: false };
-        console.log(newState);
+        // console.log(newState);
         return newState;
       }
       if (state.screen.length === 0 || state.clearOnNext) {
         newState = { ...state, screen: '0.', clearOnNext: false };
-        console.log(newState);
+        // console.log(newState);
         return newState;
       }
       newState = { ...state, screen: state.screen + action.type, clearOnNext: false };
-      console.log(newState);
+      // console.log(newState);
       return newState;
     case '0':
     case '1':
@@ -91,7 +91,7 @@ function calcReducer(state, action) {
         }
       }
       newState = { ...state, screen: newScreen, clearOnNext: false };
-      console.log(newState);
+      // console.log(newState);
       return newState;
     case '+':
     case '-':
@@ -100,21 +100,21 @@ function calcReducer(state, action) {
       if (state.screen.length === 0) return { ...state };
       const newTot = state.total == null ? strToNum(state.screen) : evaluate(state.operation, state.total, strToNum(state.screen));
       newState = { screen: numToScreenStr(newTot), operation: action.type, total: newTot, clearOnNext: true };
-      console.log(newState);
+      // console.log(newState);
       return newState;
     case '=':
       if (state.screen.length === 0 || state.clearOnNext) { return { ...state }; };
       const newTotal = evaluate(state.operation, state.total, strToNum(state.screen));
       newState = { screen: numToScreenStr(newTotal), operation: '', total: null, clearOnNext: true };
-      console.log(newState);
+      // console.log(newState);
       return newState;
     case 'Reset':
       newState = initialState;
-      console.log(newState);
+      // console.log(newState);
       return newState;
     case 'Del':
       newState = { ...state, screen: state.screen.length > 0 && !state.clearOnNext ? state.screen.slice(0, -1) : state.screen };
-      console.log(newState);
+      // console.log(newState);
       return newState;
     default:
       throw new Error("Unsupported action type in calcReducer");
