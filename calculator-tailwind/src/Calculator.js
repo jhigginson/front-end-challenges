@@ -133,7 +133,7 @@ const Calculator = (props) => {
     <main className="h-full flex flex-col gap-6 md:mb-12">
       <p id="screen"
         className="flex-none bg-screen-b rounded-xl h-[88px] md:h-[124px] w-full text-4xl md:text-6xl text-right pr-7 pt-[26px] md:pt-[38px]">
-        {state.screen}
+        {state.screen === "" ? state.screen : state.screen[state.screen.length - 1] === '.' ? parseFloat(state.screen.slice(0, state.screen.length - 1)).toLocaleString('en-US') + "." : parseFloat(state.screen).toLocaleString('en-US')}
       </p>
 
       <section id="keypad"
@@ -141,14 +141,14 @@ const Calculator = (props) => {
       >
         {['7', '8', '9', 'Del', '4', '5', '6', '+', '1', '2', '3', '-', '.', '0', '/', 'x', 'Reset', '='].map((keyName, index) => {
           const keyType = getKeyType(keyName);
-          const isDouble = ['Reset', '='].includes(keyName);
+          const isColSpan2 = ['Reset', '='].includes(keyName);
           const textSize = keyType === 'func' ? 'text-md' : 'text-[32px]';
           return (
             <div key={index} id={`key${keyName}`}
               onClick={() =>
                 dispatch({ type: keyName })
               }
-              className={`cursor-pointer flex items-center justify-center rounded-md md:rounded-xl bg-${keyType}-key-b text-${keyType}-key-t ${textSize} ${isDouble && 'col-span-2'} shadow-keys shadow-${keyType}-key-sh hover:bg-${keyType}-key-h`}>
+              className={`cursor-pointer flex items-center justify-center rounded-md md:rounded-xl bg-${keyType}-key-b text-${keyType}-key-t ${textSize} ${isColSpan2 && 'col-span-2'} shadow-keys shadow-${keyType}-key-sh hover:bg-${keyType}-key-h`}>
               <p className={`md:text-5xl pt-2 leading-none ${keyType === 'func' && 'uppercase md:text-[32px]'} select-none`}>{keyName}</p>
             </div>
           );
