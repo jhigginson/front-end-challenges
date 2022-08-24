@@ -29,18 +29,27 @@ function numToScreenStr(num) {
   return num.toLocaleString('en-US');
 }
 
+const calcStates = {
+  start: 0,
+  first_arg: 1,
+  first_arg_float: 2,
+  operation: 3,
+  second_arg: 4,
+  second_arg_float: 5,
+  equals: 6,
+};
+
 const initialState = {
-  screen: "",
+  state: calcStates.start,
+  display: "",
   operation: "",
-  total: null,
-  clearOnNext: true,
+  firstArg: 0,
+  secondArg: 0,
 };
 
 function evaluate(operation, first, second) {
 
   switch (operation) {
-    case '':
-      return second;
     case '+':
       return first + second;
     case '-':
@@ -54,24 +63,19 @@ function evaluate(operation, first, second) {
   }
 }
 
-function calcReducer(state, action) {
-  // console.log(action.type);
-  let newState = {};
-  switch (action.type) {
+const keyClass = {
+  NUM: 0,
+  DOT: 1,
+  OP: 2,
+  EQ: 3,
+  RES: 4,
+  DEL: 5,
+};
+
+const getKeyClass = (key) => {
+  switch (key) {
     case '.':
-      if (state.screen.includes('.') && !state.clearOnNext) {
-        newState = { ...state, clearOnNext: false };
-        // console.log(newState);
-        return newState;
-      }
-      if (state.screen.length === 0 || state.clearOnNext) {
-        newState = { ...state, screen: '0.', clearOnNext: false };
-        // console.log(newState);
-        return newState;
-      }
-      newState = { ...state, screen: state.screen + action.type, clearOnNext: false };
-      // console.log(newState);
-      return newState;
+      return keyClass.DOT;
     case '0':
     case '1':
     case '2':
@@ -82,41 +86,137 @@ function calcReducer(state, action) {
     case '7':
     case '8':
     case '9':
-      let newScreen = state.screen;
-      if (state.clearOnNext) {
-        newScreen = action.type;
-      } else if (state.screen.length <= MAX_PRECISION){
-          newScreen = state.screen + action.type;
-      }
-      newState = { ...state, screen: newScreen, clearOnNext: false };
-      // console.log(newState);
-      return newState;
+      return keyClass.NUM;
     case '+':
     case '-':
     case '/':
     case 'x':
-      if (state.screen.length === 0) return { ...state };
-      const newTot = state.total == null ? strToNum(state.screen) : evaluate(state.operation, state.total, strToNum(state.screen));
-      newState = { screen: numToScreenStr(newTot), operation: action.type, total: newTot, clearOnNext: true };
-      // console.log(newState);
-      return newState;
+      return keyClass.OP;
     case '=':
-      if (state.screen.length === 0 || state.clearOnNext) { return { ...state }; };
-      const newTotal = evaluate(state.operation, state.total, strToNum(state.screen));
-      newState = { screen: numToScreenStr(newTotal), operation: '', total: null, clearOnNext: true };
-      // console.log(newState);
-      return newState;
+      return keyClass.EQ;
     case 'Reset':
-      newState = initialState;
-      // console.log(newState);
-      return newState;
+      return keyClass.RES;
     case 'Del':
-      newState = { ...state, screen: state.screen.length > 0 && !state.clearOnNext ? state.screen.slice(0, -1) : state.screen };
-      // console.log(newState);
-      return newState;
+      return keyClass.DEL
     default:
-      throw new Error("Unsupported action type in calcReducer");
+      return undefined;
   }
+}
+
+function calcReducer(state, action) {
+  const keyCl = getKeyClass(action.type);
+
+  if (keyCl === keyClass.RES) { //always reset state to start if reset is pressed
+    return initialState;
+  }
+
+  switch (state.state) {
+    case calcStates.start:
+      if (keyCl === keyClass.DOT) {
+        return { ...state, state: calcStates.first_arg_float, display: "0." };
+      }
+      if (keyCl === keyClass.NUM) {
+        return { ...state, state: calcStates.first_arg, display: action.type };
+      }
+      break;
+    case calcStates.first_arg:
+      if (keyCl === keyClass.DEL) {
+        if (state.display.length === 1) {
+          return initialState;
+        }
+        return { ...state, display: state.display.slice(0, -1) };
+      }
+      if (keyCl === keyClass.NUM) {
+        return { ...state, display: state.display + action.type };
+      }
+      if (keyCl === keyClass.DOT) {
+        return { ...state, state: calcStates.first_arg_float, display: state.display + '.' };
+      }
+      if (keyCl === keyClass.OP) {
+        return { ...state, state: calcStates.operation, operation: action.type, firstArg: parseFloat(state.display), display: parseFloat(state.display).toString() };
+      }
+      break;
+    case calcStates.first_arg_float:
+      if (keyCl === keyClass.DEL) {
+        return { ...state, display: state.display.slice(0, -1), state: state.display.at(-1) === '.' ? calcStates.first_arg : state.state };
+      }
+      if (keyCl === keyClass.NUM) {
+        return { ...state, display: state.display + action.type };
+      }
+      if (keyCl === keyClass.OP) {
+        return { ...state, state: calcStates.operation, operation: action.type, firstArg: parseFloat(state.display) };
+      }
+      break;
+    case calcStates.operation:
+      if (keyCl === keyClass.DEL){
+        if(state.display.length === 1) return initialState;
+        let newDisp = state.display.slice(0, -1);
+        return { ...state, state: newDisp.includes('.') ? calcStates.first_arg_float : calcStates.first_arg, display: newDisp };
+      }
+      if (keyCl === keyClass.NUM) {
+        return { ...state, state: calcStates.second_arg, display: action.type };
+      }
+      if (keyCl === keyClass.DOT) {
+        return { ...state, state: calcStates.second_arg_float, display: "0." };
+      }
+      if (keyCl === keyClass.OP) {
+        return { ...state, operation: action.type };
+      }
+      break;
+    case calcStates.second_arg:
+      if (keyCl === keyClass.DEL) {
+        if (state.display.length === 1) {
+          return { ...state, state: calcStates.operation, display: "" };
+        }
+        return { ...state, display: state.display.slice(0, -1) };
+      }
+      if (keyCl === keyClass.NUM) {
+        return { ...state, display: state.display + action.type };
+      }
+      if (keyCl === keyClass.EQ) {
+        return { ...state, state: calcStates.equals, secondArg: parseFloat(state.display), display: evaluate(state.operation, state.firstArg, parseFloat(state.display)).toString() };
+      }
+      if (keyCl === keyClass.OP) {
+        let total = evaluate(state.operation, state.firstArg, parseFloat(state.display));
+        return { ...state, state: calcStates.operation, display: total.toString(), operation: action.type, firstArg: total }
+      }
+      if (keyCl === keyClass.DOT) {
+        return { ...state, state: calcStates.second_arg_float, display: state.display + '.', };
+      }
+      break;
+    case calcStates.second_arg_float:
+      if (keyCl === keyClass.DEL) {
+        return { ...state, display: state.display.slice(0, -1), state: state.display.at(-1) === '.' ? calcStates.second_arg : state.state };
+      }
+      if (keyCl === keyClass.NUM) {
+        return { ...state, display: state.display + action.type };
+      }
+      if (keyCl === keyClass.OP) {
+        let total = evaluate(action.type, state.firstArg, parseFloat(state.display));
+        return { ...state, state: calcStates.operation, display: total.toString(), operation: action.type, firstArg: total };
+      }
+      if (keyCl === keyClass.EQ) {
+        return { ...state, state: calcStates.equals, secondArg: parseFloat(state.display), display: evaluate(state.operation, state.firstArg, parseFloat(state.display)).toString() };
+      }
+      break;
+    case calcStates.equals:
+      if (keyCl === keyClass.EQ) {
+        return { ...state, display: evaluate(state.operation, parseFloat(state.display), state.secondArg).toString() };
+      }
+      if (keyCl === keyClass.NUM) {
+        return { ...state, state: calcStates.first_arg, display: action.type };
+      }
+      if (keyCl === keyClass.OP) {
+        return { ...state, state: calcStates.operation, operation: action.type, firstArg: parseFloat(state.display) };
+      }
+      if (keyCl === keyClass.DOT) {
+        return { ...state, state: calcStates.first_arg_float, display: "0." };
+      }
+      break;
+    default:
+      return { ...state };
+  }
+  return { ...state };
 }
 
 
@@ -130,7 +230,7 @@ const Calculator = (props) => {
     <main className="h-full flex flex-col gap-6 md:mb-12">
       <p id="screen"
         className="flex-none bg-screen-b rounded-xl h-[88px] md:h-[124px] w-full text-4xl md:text-6xl text-right pr-7 pt-[26px] md:pt-[38px]">
-        {state.screen === "" ? state.screen : state.screen[state.screen.length - 1] === '.' ? parseFloat(state.screen.slice(0, state.screen.length - 1)).toLocaleString('en-US') + "." : state.screen}
+        {state.display}
       </p>
 
       <section id="keypad"
